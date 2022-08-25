@@ -3,5 +3,4 @@ module.exports = {
     title: `himnapp`,
     siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: [],
 }
