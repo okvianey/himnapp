@@ -4,11 +4,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import { Box } from '@mui/material';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import { Box, Container } from '@mui/material';
+
+const himnos = [ 'Himnos', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20' ];
+
 
 export default function HymnsList() {
-  const himnos = ['Himnos', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20' ];
-
   const [ checked, setChecked ] = React.useState([ 5 ]);
 
   const handleToggle = (value) => () => {
@@ -25,40 +28,45 @@ export default function HymnsList() {
   };
 
   return (
-    <Box
-      sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
-    >
-      <List 
-        dense 
-        sx={{ 
-            width: '100%',
-            maxWidth: 360, 
-            bgcolor: 'background.paper',
-            overflow: 'auto',
-            maxHeight: 300,
+    <Container
+      sx={{
+        padding: "150px 0",
+        margin: '0 auto',
+        maxWidth: 560,
+        bgcolor: 'background.paper' 
+        }}>
+        <Box>
+          <List
+            sx={{
+              bgcolor: 'background.paper',
+              overflow: 'auto',
             }}>
-        {himnos.map((value) => {
-          const labelId = `checkbox-list-secondary-label-${value}`;
-          return (
-            <ListItem
-              key={value}
-              secondaryAction={
-                <Checkbox
-                  edge="end"
-                  onChange={handleToggle(value)}
-                  checked={checked.indexOf(value) !== -1}
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              }
-              disablePadding
-            >
-              <ListItemButton>
-                <ListItemText id={labelId} primary={`${value}.  Nombre del Himno `} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
-    </Box>
+            {himnos.map((value) => {
+              const labelId = `checkbox-list-secondary-label-${value}`;
+              return (
+                <ListItem
+                  key={value}
+                  secondaryAction={
+                    <Checkbox
+                      edge="end"
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      onChange={handleToggle(value)}
+                      checked={checked.indexOf(value) !== -1}
+                      inputProps={{ 'aria-labelledby': labelId }}
+                    />
+                  }
+                  disablePadding
+                  divider
+                >
+                  <ListItemButton>
+                    <ListItemText id={labelId} primary={`${value}.  Nombre del Himno `} />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Box>
+    </Container>
   );
 }
