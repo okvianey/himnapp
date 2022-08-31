@@ -11,9 +11,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+
 import logo from '../images/logo.svg';
 import logoLight from '../images/logo-white.svg';
-// import { useTheme } from '@mui/material/styles';
 
 import DarkModeSwitch from './DarkModeSwitch';
 import SelectHymn from './SelectHymn';
@@ -22,7 +22,7 @@ import SelectHymn from './SelectHymn';
 const settings = [ 'Salir' ];
 const sessions = [ 'Iniciar Sesión', 'Crear una cuenta' ];
 
-const ResponsiveAppBar = ({ isLog, setMode, mode }) => {
+const ResponsiveAppBar = ({ isLog, mode }) => {
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -45,7 +45,7 @@ const ResponsiveAppBar = ({ isLog, setMode, mode }) => {
           </IconButton>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}> 
-            <DarkModeSwitch setMode={setMode} />
+            <DarkModeSwitch />
             {/* User Account Mobile */}
             <Box sx={{ flexGrow: 0, m: 1, display: { xs: 'flex', md: 'none' }, }}>
               <Tooltip title="Open settings">

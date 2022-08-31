@@ -1,13 +1,13 @@
 import * as React from "react"
 import CssBaseline from '@mui/material/CssBaseline';
-import HymnsList from "../Components/HymnsList";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 import FixedBottomNavigation from "../Components/FixedBottomNavigation";
 import ResponsiveAppBar from "../Components/ResponsiveAppBar";
+import { ColorModeContext } from "../Components/Context";
+import HymnsList from "../Components/HymnsList";
 // import { Container, Box, Grid } from '@mui/material';
 // import theme from "../style/theme";
-
-const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
 
 const IndexPage = () => {
   //theme

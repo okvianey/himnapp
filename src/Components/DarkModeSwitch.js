@@ -2,6 +2,8 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
+import { ColorModeContext } from './Context';
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   // width: 62,
   height: 34,
@@ -49,13 +51,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function DarkModeSwitch({ setMode }) {
-  const ColorModeContext = React.createContext({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      }
-    });
-  
+export default function DarkModeSwitch() {
+
   const colorMode = React.useContext(ColorModeContext);
 
   return (
