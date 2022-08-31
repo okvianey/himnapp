@@ -13,33 +13,27 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import logo from '../images/logo.svg';
 import logoLight from '../images/logo-white.svg';
-import { useTheme } from '@mui/material/styles';
-
+// import { useTheme } from '@mui/material/styles';
 
 import DarkModeSwitch from './DarkModeSwitch';
 import SelectHymn from './SelectHymn';
 
-const pages = [ 'Sign in', 'Log in' ];
+// const pages = [ 'Sign in', 'Log in' ];
 const settings = [ 'Salir' ];
 const sessions = [ 'Iniciar Sesión', 'Crear una cuenta' ];
 
 const ResponsiveAppBar = ({ isLog, setMode, mode }) => {
-  const [ anchorElNav, setAnchorElNav ] = React.useState(null);
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const theme = useTheme();
+  // const theme = useTheme();
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 1, zIndex: 100 }}>
@@ -101,7 +95,7 @@ const ResponsiveAppBar = ({ isLog, setMode, mode }) => {
                   settings.map((setting) => (
                   <Button
                     key={setting}
-                    onClick={handleCloseNavMenu}
+                    onClick={handleCloseUserMenu}
                     variant='outlined'
                     sx={{ m: 2, display: 'block' }}
                   >
@@ -112,7 +106,7 @@ const ResponsiveAppBar = ({ isLog, setMode, mode }) => {
                     <Box sx={{ display: 'flex'} }>
                       <Button
                         key='Crear Cuenta'
-                        onClick={handleCloseNavMenu}
+                        onClick={handleCloseUserMenu}
                         variant= 'outlined'
                         sx={{ m: 1, display: 'block'}}
                       >
@@ -120,7 +114,7 @@ const ResponsiveAppBar = ({ isLog, setMode, mode }) => {
                       </Button>
                       <Button
                         key='Iniciar Sesión'
-                        onClick={handleCloseNavMenu}
+                        onClick={handleCloseUserMenu}
                         variant= 'contained'
                         sx={{ m: 1, display: 'block'}}
                       >

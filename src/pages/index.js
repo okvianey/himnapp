@@ -4,9 +4,7 @@ import HymnsList from "../Components/HymnsList";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import FixedBottomNavigation from "../Components/FixedBottomNavigation";
 import ResponsiveAppBar from "../Components/ResponsiveAppBar";
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+// import { Container, Box, Grid } from '@mui/material';
 // import theme from "../style/theme";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => { } });

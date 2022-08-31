@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+import { Box, Grid } from '@mui/material';
 
 const himnos = [ '', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20' ];
 
@@ -37,7 +38,7 @@ export default function SelectHymn() {
   };
 
   return (
-    <React.Fragment>
+    <Box>
       <ButtonGroup 
         color='neutral' 
         variant="outlined" 
@@ -80,38 +81,40 @@ export default function SelectHymn() {
                 placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
-            <Paper >
+            <Paper elevation={3}>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu" autoFocusItem 
+                <MenuList 
+                  id="split-button-menu" 
+                  autoFocusItem 
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    flexFlow: 'wrap' }}>
-                  {himnos.map((option, index) => (
-                    <MenuItem
-                      key={option}
-                      divider='true'
-                      selected={index === selectedIndex}
-                      onClick={(event) => handleMenuItemClick(event, index)}
-                      sx={{
-                        margin: '2px',
-                        width: '50px',
-                        height: '50px',
-                        textAlign: 'center',
-                        border: '1px solid gray',
-                        borderRadius: '5px'
-                      }}
-                    >
-                      {option}
-                    </MenuItem>
-                  ))}
+                  p: 1
+                }}>
+                  <Grid container spacing={0.5} columns={{ xs:6, sm: 12 }}>
+                      {himnos.map((option, index) => (
+                        <Grid item xs={1} sm={2} key={option}>
+                          <MenuItem
+                            key={option}
+                            selected={index === selectedIndex}
+                            onClick={(event) => handleMenuItemClick(event, index)}
+                            sx={{
+                              height: '50px',
+                              textAlign: 'center',
+                              justifyContent: 'center',
+                              border: '1px solid gray',
+                              borderRadius: '5px'
+                            }}
+                          >
+                            {option}
+                            </MenuItem>
+                          </Grid>
+                    ))}
+                    </Grid>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </Box>
   );
 }
