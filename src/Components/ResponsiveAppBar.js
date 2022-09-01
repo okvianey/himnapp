@@ -1,16 +1,19 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  Tooltip,
+  MenuItem,
+  Divider
+} from '@mui/material/';
 import PersonIcon from '@mui/icons-material/Person';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import Divider from '@mui/material/Divider';
 
 import logo from '../images/logo.svg';
 import logoLight from '../images/logo-white.svg';
@@ -56,7 +59,7 @@ const ResponsiveAppBar = ({ isLog, mode }) => {
                   aria-haspopup="true"
                   onClick={handleOpenUserMenu}
                   sx={{ p: 1 }}>
-                  <PersonIcon />
+                  <PersonIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -127,6 +130,7 @@ const ResponsiveAppBar = ({ isLog, mode }) => {
           </Box>
         </Toolbar>
       </Container>
+
       <Divider />
       <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
         <SelectHymn />
@@ -134,4 +138,5 @@ const ResponsiveAppBar = ({ isLog, mode }) => {
     </AppBar>
   );
 };
+
 export default ResponsiveAppBar;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'gatsby';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -21,7 +22,10 @@ export default function FixedBottomNavigation() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Índice" icon={<ListIcon />} />
+          <BottomNavigationAction label="Índice" icon={<ListIcon />} 
+          // onClick={<Link to="/">Back to Home</Link>} 
+
+          />
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         </BottomNavigation>
       </Paper>

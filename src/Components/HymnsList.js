@@ -1,15 +1,22 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
+import { Link } from 'gatsby';
+
+import { hymns } from '../assets/hymns';
+
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import { Box, Container } from '@mui/material';
+import { 
+  Box, 
+  Container,
+  List,
+  ListItem,
+  ListItemButton,
+  Checkbox, 
+  Typography
+} from '@mui/material';
 
-const himnos = [ 'Himnos', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20' ];
-
+//HardCode
+// const himnos = [ 'Himnos', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20' ];
 
 export default function HymnsList() {
   const [ checked, setChecked ] = React.useState([ 5 ]);
@@ -17,13 +24,12 @@ export default function HymnsList() {
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [ ...checked ];
-
+    
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     setChecked(newChecked);
   };
 
@@ -36,16 +42,17 @@ export default function HymnsList() {
         bgcolor: 'background.paper' 
         }}>
         <Box>
+          <Typography variant='h1'>Índice</Typography>
           <List
             sx={{
               bgcolor: 'background.paper',
               overflow: 'auto',
             }}>
-            {himnos.map((value) => {
-              const labelId = `checkbox-list-secondary-label-${value}`;
+            {hymns.map((value) => {
+              const labelId = `checkbox-list-secondary-label-${value.number}`;
               return (
                 <ListItem
-                  key={value}
+                  key={value.number}
                   secondaryAction={
                     <Checkbox
                       edge="end"
@@ -59,8 +66,16 @@ export default function HymnsList() {
                   disablePadding
                   divider
                 >
-                  <ListItemButton>
-                    <ListItemText id={labelId} primary={`${value}.  Nombre del Himno `} />
+                  <ListItemButton color='inherit'>
+                    <Link
+                      id={labelId} 
+                      to='/himno' 
+                      style={{
+                        color: 'inherit',
+                        textDecoration: 'none'
+                      }} >
+                        {`${value.number}. ${value.title}`}
+                      </Link>  
                   </ListItemButton>
                 </ListItem>
               );

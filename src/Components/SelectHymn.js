@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Link } from 'gatsby'
+
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -104,7 +106,9 @@ export default function SelectHymn() {
                               borderRadius: '5px'
                             }}
                           >
-                            {option}
+                            <Link to="/Himno">{option}</Link>
+
+                            
                             </MenuItem>
                           </Grid>
                     ))}
