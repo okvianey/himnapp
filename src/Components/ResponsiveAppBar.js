@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'gatsby';
 
 import {
   AppBar,
@@ -18,14 +19,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import logo from '../images/logo.svg';
 import logoLight from '../images/logo-white.svg';
 
-import DarkModeSwitch from './DarkModeSwitch';
-import SelectHymn from './SelectHymn';
+import DarkModeSwitch from './darkModeSwitch';
+import SelectHymn from './selectHymn';
 
 // const pages = [ 'Sign in', 'Log in' ];
 const settings = [ 'Salir' ];
 const sessions = [ 'Iniciar Sesión', 'Crear una cuenta' ];
 
-const ResponsiveAppBar = ({ isLog, mode }) => {
+const ResponsiveAppBar = ({ isLog, mode, testing }) => {
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -42,10 +43,9 @@ const ResponsiveAppBar = ({ isLog, mode }) => {
     <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 1, zIndex: 100 }}>
       <Container maxWidth="xl" sx={{ p: 0 }} >
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-
-          <IconButton edge="end" size="large">
+          <Link to='/'>
             <img src={mode === "light" ? logo : logoLight} width={100} alt="logo" />
-          </IconButton>
+          </Link>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}> 
             <DarkModeSwitch />
@@ -133,7 +133,7 @@ const ResponsiveAppBar = ({ isLog, mode }) => {
 
       <Divider />
       <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
-        <SelectHymn />
+        <SelectHymn testing={testing} />
       </Container>
     </AppBar>
   );
