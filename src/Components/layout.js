@@ -6,20 +6,19 @@ import ResponsiveAppBar from "./responsiveAppBar";
 
 import { ColorModeContext } from "./context";
 
-import CssBaseline from '@mui/material/CssBaseline';
+import { CssBaseline, Container } from '@mui/material/';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const Layout = ({ pageTitle, children }) => {
-//    const data = useStaticQuery(graphql`
-//     query {
-//       site {
-//         siteMetadata {
-//           title
-//         }
-//       }
-//     }
-//   `)
-
+const Layout = ({ children, hymnNumber }) => {
+   const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
    // Dark Mode
    const [ mode, setMode ] = React.useState('light');
    const colorMode = React.useMemo(
@@ -65,13 +64,20 @@ const Layout = ({ pageTitle, children }) => {
 
    return (
       <ColorModeContext.Provider value={colorMode}>
+         <header>{ data.site.siteMetadata.title }</header>
          <ThemeProvider theme={theme}>
             <CssBaseline />
-            <ResponsiveAppBar mode={mode} isLog={isLog} />
-            <h1>{ pageTitle }</h1>
-            {children}
+            <ResponsiveAppBar mode={mode} isLog={isLog} hymnNumber={hymnNumber} />
+            <Container
+               sx={{
+                  padding: "180px 10px",
+                  margin: '0 auto',
+                  maxWidth: 560,
+                  // bgcolor: 'background.paper'
+               }}>
+               {children}
+            </Container>
             <FixedBottomNavigation />
-            {/* </SelectedIndexContext.Provider> */}
          </ThemeProvider>
       </ColorModeContext.Provider>
    )

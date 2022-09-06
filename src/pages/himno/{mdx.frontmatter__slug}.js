@@ -13,8 +13,9 @@ import {
 
 const HimnoPage = ({ data, children }) => {
 
+
   return (
-    <Layout pageTitle={data.mdx.frontmatter.title} >
+    <Layout pageTitle={data.mdx.frontmatter.title} hymnNumber={data.mdx.frontmatter.slug} >
       {/* <Container> */}
       <Paper elevation={3} sx={{ padding: "100px 10px", }}>
         <Box sx={{ margin: "0 auto", maxWidth: "600px", }}>
@@ -22,12 +23,8 @@ const HimnoPage = ({ data, children }) => {
             {data.mdx.frontmatter.title}
           </Typography>
 
-          <Grid container p={2} sx={{ margin: "0 auto", maxWidth: "400px", }} >
-            <Grid item p={2}>
-              <Typography variant="body" align="center" paragraph={true}>
-                {children}
-              </Typography>
-            </Grid>
+          <Grid container p={2} align="center" sx={{ margin: "0 auto", maxWidth: "400px", textAlign: "center", justifyContent: "center" }} >
+              {children}
           </Grid>
         </Box>
       </Paper>
@@ -41,6 +38,7 @@ export const query = graphql`
     mdx(id: {eq: $id}) {
       frontmatter {
         title
+        slug
       }
     }
   }

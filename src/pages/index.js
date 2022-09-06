@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link, 
-  // useStaticQuery, 
+import { 
+  Link,  
   graphql } from 'gatsby';
 
 import Layout from "../components/layout";
@@ -10,7 +10,6 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {
   Box,
-  Container,
   List,
   ListItem,
   ListItemButton,
@@ -19,16 +18,6 @@ import {
 } from '@mui/material';
 
 const IndexPage = ({ data }) => {
-  // const data = useStaticQuery(graphql`
-  //   query {
-  //     site {
-  //       siteMetadata {
-  //         title
-  //       }
-  //     }
-  //   }
-  // `);
-
   const [ checked, setChecked ] = React.useState([ 5 ]);
 
   const handleToggle = (value) => () => {
@@ -45,22 +34,17 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout pageTitle={"Home Page"} >
-      <Container
-        sx={{
-          padding: "150px 0",
-          margin: '0 auto',
-          maxWidth: 560,
-          bgcolor: 'background.paper'
-        }}>
-        <Box>
-          <Typography variant='h1' mb={2}>Índice</Typography>
-          <List
-            sx={{
-              bgcolor: 'background.paper',
-              overflow: 'auto',
-            }}>
-            {data.allMdx.nodes.map((node) => {
-              const labelId = `checkbox-list-secondary-label-${node.id}`;
+      <Box>
+        <Typography variant='h1' mb={2}>Índice</Typography>
+        <List sx={{ bgcolor: 'background.paper', overflow: 'auto', }}>
+          { data.allMdx.nodes.map((node) => {
+            const labelId = `checkbox-list-secondary-label-${node.id}`;
+            if (node.frontmatter.slug === "00" ){
+              return (
+                <ListItem key={node.id}>
+                </ListItem>
+              );
+            } else { 
               return (
                 <ListItem
                   key={node.id}
@@ -77,23 +61,24 @@ const IndexPage = ({ data }) => {
                   disablePadding
                   divider
                 >
-                  <ListItemButton color='inherit'>
-                    <Link
-                      id={labelId}
-                      to='/himno'
-                      style={{
-                        color: 'inherit',
-                        textDecoration: 'none'
-                      }} >
-                      {`${node.frontmatter.title}`}
-                    </Link>
-                  </ListItemButton>
+                  <Link
+                    id={labelId}
+                    to={`/himno/${node.frontmatter.slug}`}
+                    style={{
+                      width: "100%",
+                      color: 'inherit',
+                      textDecoration: 'none'
+                    }} >
+                    <ListItemButton color='inherit'>
+                      {node.frontmatter.title}
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
               );
-            })}
-          </List>
-        </Box>
-      </Container>
+            } 
+          })}
+        </List>
+      </Box>
     </Layout>
   )
 }

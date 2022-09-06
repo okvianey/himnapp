@@ -22,11 +22,12 @@ import logoLight from '../images/logo-white.svg';
 import DarkModeSwitch from './darkModeSwitch';
 import SelectHymn from './selectHymn';
 
+
 // const pages = [ 'Sign in', 'Log in' ];
 const settings = [ 'Salir' ];
 const sessions = [ 'Iniciar Sesión', 'Crear una cuenta' ];
 
-const ResponsiveAppBar = ({ isLog, mode, testing }) => {
+const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -36,8 +37,6 @@ const ResponsiveAppBar = ({ isLog, mode, testing }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  // const theme = useTheme();
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 1, zIndex: 100 }}>
@@ -130,10 +129,9 @@ const ResponsiveAppBar = ({ isLog, mode, testing }) => {
           </Box>
         </Toolbar>
       </Container>
-
       <Divider />
-      <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
-        <SelectHymn testing={testing} />
+      <Container sx={{ padding: "40px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
+        <SelectHymn hymnNumber={hymnNumber} />
       </Container>
     </AppBar>
   );
