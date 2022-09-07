@@ -5,8 +5,8 @@ import {
   useStaticQuery
 } from 'gatsby';
 
-import { hymns } from '../assets/hymns';
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SearchIcon from '@mui/icons-material/Search';
 import { 
   Box, 
   Grid,
@@ -35,17 +35,11 @@ const SelectHymn = ({ hymnNumber }) => {
       }
     }
   `)
-
   const [ open, setOpen ] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [ selectedIndex, setSelectedIndex ] = React.useState(0);
+  // const [ selectedIndex, setSelectedIndex ] = React.useState("00");
 
-  // const handleClick = () => {
-  //   console.info(`You clicked ${himnos[ selectedIndex ]}`);
-  // };
-
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
+  const handleMenuItemClick = () => {
     setOpen(false);
   };
 
@@ -62,7 +56,7 @@ const SelectHymn = ({ hymnNumber }) => {
 
   return (
     <Box>
-      <ButtonGroup color='neutral' variant="outlined" ref={anchorRef}aria-label="split button group outline">
+      <ButtonGroup color='neutral' variant="outlined" ref={anchorRef} aria-label="split button group outline">
         <Button
           size="small"
           aria-controls={open ? 'split-button-menu' : undefined}
@@ -75,8 +69,8 @@ const SelectHymn = ({ hymnNumber }) => {
           }}
           onClick={handleToggle} 
           >
-            { hymnNumber !== undefined ? 'Himno ' + hymnNumber : 'Buscar himno'}
-          <ArrowDropDownIcon />
+            {hymnNumber !== undefined ? 'Himno ' + hymnNumber  : 'Buscar himno'}
+            <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
       <Popper
@@ -89,7 +83,6 @@ const SelectHymn = ({ hymnNumber }) => {
         role={undefined}
         transition
         disablePortal
-        // style={{ maxWidth: '453px' }}
         >
         {({ TransitionProps, placement }) => (
           <Grow
@@ -101,18 +94,19 @@ const SelectHymn = ({ hymnNumber }) => {
           >
             <Paper elevation={3}>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu" autoFocusItem sx={{ p: 1 }}>
+                <MenuList id="split-button-menu"  sx={{ p: 1 }}>
                   <Grid container spacing={0.5} columns={{ xs:6, sm: 12 }}>
-                    { data.allMdx.nodes.map((node, index) => {
+                    { data.allMdx.nodes.map((node) => {
+                      const index = node.frontmatter.slug; //Hymn Number selected
 
-                      if (index === 0){
+                      if (index === "00"){
                         return (
                         <Grid item xs={1} sm={2} key={node.id}>
                           <Link id={node.id} to={`/`}>
                             <MenuItem
                               key={node.id}
-                              selected={index === selectedIndex}
-                              onClick={(event) => handleMenuItemClick(event, index)}
+                              selected={index === hymnNumber}
+                              onClick={() => handleMenuItemClick()}
                               sx={{
                                 height: '50px',
                                 textAlign: 'center',
@@ -121,6 +115,7 @@ const SelectHymn = ({ hymnNumber }) => {
                                 borderRadius: '5px'
                               }}
                             > 
+                              <SearchIcon color="disabled" />
                             </MenuItem>
                           </Link>
                         </Grid> 
@@ -128,11 +123,15 @@ const SelectHymn = ({ hymnNumber }) => {
                       } else {
                         return (
                           <Grid item xs={1} sm={2} key={node.id}>
-                            <Link id={node.id} to={`/himno/${node.frontmatter.slug}`}>
-                              <MenuItem
-                                key={node.id}
-                                selected={index === selectedIndex}
-                                onClick={(event) => handleMenuItemClick(event, index)}
+                            <Link id={node.id} 
+                              to={`/himno/${node.frontmatter.slug}`} 
+                              style={{
+                                color: "inherit",
+                                textDecoration: "none",
+                              }} >
+                              <MenuItem key={node.id}
+                                selected={index === hymnNumber}
+                                onClick={() => handleMenuItemClick()}
                                 sx={{
                                   height: '50px',
                                   textAlign: 'center',
@@ -140,8 +139,8 @@ const SelectHymn = ({ hymnNumber }) => {
                                   border: '1px solid gray',
                                   borderRadius: '5px'
                                 }}
-                              >
-                                {node.frontmatter.slug}
+                                >
+                                  {node.frontmatter.slug}
                               </MenuItem>
                             </Link>
                           </Grid>
@@ -149,7 +148,6 @@ const SelectHymn = ({ hymnNumber }) => {
                       }
                     })}
                   </Grid>
-                      
                 </MenuList>
               </ClickAwayListener>
             </Paper>

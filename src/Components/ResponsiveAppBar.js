@@ -22,7 +22,6 @@ import logoLight from '../images/logo-white.svg';
 import DarkModeSwitch from './darkModeSwitch';
 import SelectHymn from './selectHymn';
 
-
 // const pages = [ 'Sign in', 'Log in' ];
 const settings = [ 'Salir' ];
 const sessions = [ 'Iniciar Sesión', 'Crear una cuenta' ];

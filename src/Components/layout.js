@@ -77,7 +77,7 @@ const Layout = ({ children, hymnNumber }) => {
                }}>
                {children}
             </Container>
-            <FixedBottomNavigation />
+            <FixedBottomNavigation hymnNumber={hymnNumber} />
          </ThemeProvider>
       </ColorModeContext.Provider>
    )
