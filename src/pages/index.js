@@ -1,14 +1,14 @@
 import * as React from "react";
-import { 
-  Link,  
-  graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 
 import Layout from "../components/layout";
 import Seo from '../components/seo';
+import SearchBar from '../components/searchBar';
 
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {
+  Container,
   Box,
   List,
   ListItem,
@@ -32,14 +32,36 @@ const IndexPage = ({ data }) => {
     setChecked(newChecked);
   };
 
+  const himnarioCompleto = data.allMdx.nodes;
+  const [ himnario, setHimnario ] = React.useState(data.allMdx.nodes);
+
+  const handleSearch = (e) => {
+    let checkWord = '' + e.target.value.toUpperCase();
+    let himnosFiltrados = himnarioCompleto.filter((himno) => himno.frontmatter.title.includes(checkWord));
+
+    setHimnario(himnosFiltrados);
+
+    console.log(himnario);
+    console.log(checkWord);
+    // console.log(himnosFiltrados);
+  }
+
   return (
     <Layout pageTitle={"Home Page"} >
-      <Box>
-        <Typography variant='h1' mb={2}>Índice</Typography>
+      <Container>
+        <Box 
+          sx={{ 
+            p: 2, 
+            border: '1px dashed grey', 
+            display: "flex", 
+            justifyContent: "space-between" }}>
+          <Typography variant='h1' mb={2}>Índice</Typography>
+          <SearchBar handleSearch={handleSearch} />
+        </Box>
         <List sx={{ bgcolor: 'background.paper', overflow: 'auto', }}>
-          { data.allMdx.nodes.map((node) => {
+          {himnario.map((node) => {
             const labelId = `checkbox-list-secondary-label-${node.id}`;
-            if (node.frontmatter.slug === "00" ){
+            if (node.frontmatter.slug === "0" ){
               return (
                 <ListItem key={node.id}>
                 </ListItem>
@@ -62,6 +84,7 @@ const IndexPage = ({ data }) => {
                   divider
                 >
                   <ListItemButton color='inherit' component={Link} to={`/himno/${node.frontmatter.slug}`} >
+                    {/* {console.log(node.frontmatter.slug)} */}
                     {node.frontmatter.title}
                   </ListItemButton>
                 </ListItem>
@@ -69,7 +92,7 @@ const IndexPage = ({ data }) => {
             } 
           })}
         </List>
-      </Box>
+      </Container>
     </Layout>
   )
 }

@@ -42,7 +42,7 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
       <Container maxWidth="xl" sx={{ p: 0 }} >
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Link to='/'>
-            <img src={mode === "light" ? logo : logoLight} width={100} alt="logo" />
+            <img src={mode === "light" ? logo : logoLight} width={110} alt="logo" />
           </Link>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}> 
@@ -129,7 +129,7 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
         </Toolbar>
       </Container>
       <Divider />
-      <Container sx={{ padding: "40px 0 30px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
+      <Container sx={{ padding: "30px 0 20px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
         <SelectHymn hymnNumber={hymnNumber} />
       </Container>
     </AppBar>

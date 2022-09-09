@@ -17,7 +17,7 @@ const HimnoPage = ({ data, children }) => {
   return (
     <Layout pageTitle={data.mdx.frontmatter.title} hymnNumber={data.mdx.frontmatter.slug} >
       {/* <Container> */}
-      <Paper elevation={3} sx={{ padding: "100px 10px", }}>
+      <Paper  sx={{ padding: "100px 10px", }}>
         <Box sx={{ margin: "0 auto", maxWidth: "600px", }}>
           <Typography variant="h1" align="center" gutterBottom={true}>
             {data.mdx.frontmatter.title}
