@@ -61,18 +61,9 @@ const IndexPage = ({ data }) => {
                   disablePadding
                   divider
                 >
-                  <Link
-                    id={labelId}
-                    to={`/himno/${node.frontmatter.slug}`}
-                    style={{
-                      width: "100%",
-                      color: 'inherit',
-                      textDecoration: 'none'
-                    }} >
-                    <ListItemButton color='inherit'>
-                      {node.frontmatter.title}
-                    </ListItemButton>
-                  </Link>
+                  <ListItemButton color='inherit' component={Link} to={`/himno/${node.frontmatter.slug}`} >
+                    {node.frontmatter.title}
+                  </ListItemButton>
                 </ListItem>
               );
             } 
@@ -85,17 +76,18 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-  allMdx(sort: {fields: frontmatter___slug, order: ASC}) {
-    nodes {
-      frontmatter {
-        slug
-        title
+    allMdx(sort: {fields: frontmatter___order, order: ASC}) {
+      nodes {
+        id
+        excerpt
+        frontmatter {
+          order
+          slug
+          title
+        }
       }
-      id
-      excerpt
     }
   }
-}
 `
 export const Head = () => <Seo title="Himnario" />
 export default IndexPage;

@@ -1,4 +1,10 @@
 import * as React from "react";
+import { 
+  useLocation,
+  createHistory,
+  navigate
+  } from "@reach/router";
+import { Link } from "gatsby";
 import {
   Box,
   Paper,
@@ -8,20 +14,25 @@ import {
 import ListIcon from "@mui/icons-material/List";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import { Link } from "gatsby";
 
 export default function FixedBottomNavigation() {
+  const location = useLocation();
   const [value, setValue] = React.useState(0);
-  const [ currentPage, setCurrentPage ] = React.useState(''); ;
-  const [ lastHymn, setLastHymn ] = React.useState("");
+  const [ currentPage, setCurrentPage ] = React.useState(location.pathname); ;
+  const [ lastPage, setLastPage ] = React.useState();
+ 
+
 
   React.useEffect(() => {
-    setCurrentPage(window.location.href);
+    setCurrentPage(location.pathname);
     const handleValue = () => {
       currentPage.includes('himno') ? setValue(1) : setValue(0)
     };
     handleValue();
-  }, [ currentPage ])
+  }, [ location ]);
+
+
+
 
   return (
     <Box>
@@ -34,7 +45,8 @@ export default function FixedBottomNavigation() {
           }}
         >
           <BottomNavigationAction label="Índice" icon={<ListIcon />} component={Link} to="/" />
-          <BottomNavigationAction label="Himno" icon={<AutoStoriesIcon />} component={Link} to="/himno/05" />
+          <BottomNavigationAction label="Himno" icon={<AutoStoriesIcon />} onClick={() => { window.history.back() } } />
+          {/* <BottomNavigationAction label="Himno" icon={<AutoStoriesIcon />} component={Link} to={"/himno/02"} /> */}
           <BottomNavigationAction label="Favoritos" icon={<FavoriteIcon />} component={Link} to="/himno/10" />
         </BottomNavigation>
       </Paper>

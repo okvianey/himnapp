@@ -129,7 +129,7 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
         </Toolbar>
       </Container>
       <Divider />
-      <Container sx={{ padding: "40px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
+      <Container sx={{ padding: "40px 0 30px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
         <SelectHymn hymnNumber={hymnNumber} />
       </Container>
     </AppBar>
