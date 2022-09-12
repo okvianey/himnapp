@@ -68,13 +68,7 @@ const Layout = ({ children, hymnNumber }) => {
          <ThemeProvider theme={theme}>
             <CssBaseline />
             <ResponsiveAppBar mode={mode} isLog={isLog} hymnNumber={hymnNumber} />
-            <Container
-               sx={{
-                  padding: "180px 10px",
-                  margin: '0 auto',
-                  maxWidth: 560,
-                  // bgcolor: 'background.paper'
-               }}>
+            <Container sx={{ padding: "180px 10px", maxWidth: '600px', }}>
                {children}
             </Container>
             <FixedBottomNavigation hymnNumber={hymnNumber} />

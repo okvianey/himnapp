@@ -5,8 +5,6 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 // import IconButton from '@mui/material/IconButton';
 
-
-
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -14,11 +12,9 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
   marginLeft: 0,
   width: '100%',
   [ theme.breakpoints.up('sm') ]: {
-    marginLeft: theme.spacing(3),
     width: 'auto',
   },
 }));
@@ -50,21 +46,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBar({ handleSearch }) {
-
   return (
-    <Box>
-      <Search>
-        <SearchIconWrapper>
-          {/* <IconButton type="button"> */}
-            <SearchIcon />
-          {/* </IconButton> */}
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ 'aria-label': 'search' }}
-          onChange={handleSearch}
-        />
-      </Search>
-    </Box>
+    <Search>
+      <SearchIconWrapper>
+          <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInputBase
+        placeholder="Buscar…"
+        inputProps={{ 'aria-label': 'search' }}
+        onChange={handleSearch}
+      />
+    </Search>
   );
 }

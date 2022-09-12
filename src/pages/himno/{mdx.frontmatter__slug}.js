@@ -4,7 +4,6 @@ import Layout from '../../components/layout';
 import Seo from '../../components/seo';
 
 import {
-  Grid,
   // Container,
   Box,
   Typography,
@@ -13,22 +12,27 @@ import {
 
 const HimnoPage = ({ data, children }) => {
 
-
   return (
     <Layout pageTitle={data.mdx.frontmatter.title} hymnNumber={data.mdx.frontmatter.slug} >
-      {/* <Container> */}
-      <Paper  sx={{ padding: "100px 10px", }}>
-        <Box sx={{ margin: "0 auto", maxWidth: "600px", }}>
-          <Typography variant="h1" align="center" gutterBottom={true}>
-            {data.mdx.frontmatter.title}
-          </Typography>
+      <Paper  sx={{ padding: "50px 10px", }}>
+        <Typography variant="h1" align="center" gutterBottom={true}>
+          {data.mdx.frontmatter.title}
+        </Typography>
 
-          <Grid container p={2} align="center" sx={{ margin: "0 auto", maxWidth: "400px", textAlign: "center", justifyContent: "center" }} >
-              {children}
-          </Grid>
+        <Box container align="center" 
+          sx={{ 
+            margin: "0 auto", 
+            maxWidth: "400px", 
+            textAlign: "center", 
+            'ol': {
+              padding: '10px 0',
+              // listStylePosition: 'inside',
+              paddingInlineStart: '30px',
+            }
+          }} >
+            {children}
         </Box>
       </Paper>
-      {/* </Container> */}
     </Layout>
   );
 };

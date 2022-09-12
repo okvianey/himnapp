@@ -38,9 +38,9 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 1, zIndex: 100 }}>
-      <Container maxWidth="xl" sx={{ p: 0 }} >
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 2, zIndex: 100 }}>
+      {/* <Container maxWidth="xl" sx={{ p: 0 }} > */}
+        <Toolbar disableGutters sx={{ justifyContent: 'space-around' }}>
           <Link to='/'>
             <img src={mode === "light" ? logo : logoLight} width={110} alt="logo" />
           </Link>
@@ -48,15 +48,15 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
           <Box sx={{ display: 'flex', alignItems: 'center' }}> 
             <DarkModeSwitch />
             {/* User Account Mobile */}
-            <Box sx={{ flexGrow: 0, m: 1, display: { xs: 'flex', md: 'none' }, }}>
-              <Tooltip title="Open settings">
+            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }, }}>
+              <Tooltip title="Abrir settings">
                 <IconButton
                   size="large"
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleOpenUserMenu}
-                  sx={{ p: 1 }}>
+                  sx={{ p: 0 }}>
                   <PersonIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
@@ -127,7 +127,7 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
             </Box>
           </Box>
         </Toolbar>
-      </Container>
+      {/* </Container> */}
       <Divider />
       <Container sx={{ padding: "30px 0 20px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
         <SelectHymn hymnNumber={hymnNumber} />

@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import Seo from '../components/seo';
 import SearchBar from '../components/searchBar';
 
+import { styled } from '@mui/material/styles';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {
@@ -16,6 +17,20 @@ import {
   Checkbox,
   Typography
 } from '@mui/material';
+
+
+
+const StyledSearchBox = styled('div')(({ theme }) => ({
+  padding: 20,
+  border: '1px dashed grey',
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: 'center',
+  [ theme.breakpoints.down('sm') ]: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+}));
 
 const IndexPage = ({ data }) => {
   const [ checked, setChecked ] = React.useState([ 5 ]);
@@ -36,28 +51,19 @@ const IndexPage = ({ data }) => {
   const [ himnario, setHimnario ] = React.useState(data.allMdx.nodes);
 
   const handleSearch = (e) => {
+    e.preventDefault();
     let checkWord = '' + e.target.value.toUpperCase();
     let himnosFiltrados = himnarioCompleto.filter((himno) => himno.frontmatter.title.includes(checkWord));
-
     setHimnario(himnosFiltrados);
-
-    console.log(himnario);
-    console.log(checkWord);
-    // console.log(himnosFiltrados);
   }
+
 
   return (
     <Layout pageTitle={"Home Page"} >
-      <Container>
-        <Box 
-          sx={{ 
-            p: 2, 
-            border: '1px dashed grey', 
-            display: "flex", 
-            justifyContent: "space-between" }}>
+        <StyledSearchBox>
           <Typography variant='h1' mb={2}>Índice</Typography>
           <SearchBar handleSearch={handleSearch} />
-        </Box>
+        </StyledSearchBox>
         <List sx={{ bgcolor: 'background.paper', overflow: 'auto', }}>
           {himnario.map((node) => {
             const labelId = `checkbox-list-secondary-label-${node.id}`;
@@ -92,7 +98,6 @@ const IndexPage = ({ data }) => {
             } 
           })}
         </List>
-      </Container>
     </Layout>
   )
 }
