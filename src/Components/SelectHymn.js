@@ -14,23 +14,23 @@ import {
   DialogContent
 } from "@mui/material";
 
+
 const SimpleDialog = ({ onClose, open, hymnNumber }) => {
   const data = useStaticQuery(graphql`
     query {
       allMdx(sort: {fields: frontmatter___order, order: ASC}) {
         nodes {
           id
-          excerpt
           frontmatter {
-            order
-            slug
             title
+            slug
+            order
           }
         }
       }
     }
   `);
-
+  
   return (
     <Dialog onClick={() => onClose()} open={open} fullWidth>
       <DialogTitle id="responsive-dialog-title" sx={{ px: 1 }}>{"Selecciona un himno:"}</DialogTitle>
@@ -45,12 +45,13 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
         >
           {
             data.allMdx.nodes.map((node) => {
-            const index = node.frontmatter.slug; //Hymn Number selected
-            if (index === "0") {
+            const index = '/himno/' + node.frontmatter.slug; //Hymn Number selected
+            
+              if (index === "/himno/0") {
               return (
                 <MenuItem
                   key={node.id}
-                  selected={index === hymnNumber}
+                  // selected={index.includes(hymnNumber)}
                   disableGutters
                   // dense
                   sx={{
@@ -92,7 +93,8 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
   )
 }
 
-function SelectHymn({ hymnNumber }) {
+function SelectHymn() {
+  const hymnNumber = window.location.pathname;
   const [open, setOpen] = React.useState(false);
 
   const handleToggle = () => {
@@ -105,7 +107,7 @@ function SelectHymn({ hymnNumber }) {
 
   return (
     <Box>
-      <ButtonGroup color="neutral" variant="outlined">
+      <ButtonGroup color="neutral" variant="outlined" size="small">
         <Button
           size="small"
           sx={{
@@ -114,7 +116,11 @@ function SelectHymn({ hymnNumber }) {
           }}
           onClick={handleToggle}
         >
-          {hymnNumber !== undefined ? "Himno " + hymnNumber : "Buscar himno"}
+          { hymnNumber[ hymnNumber.length - 2 ] === '/' ? 
+          "Himno " + hymnNumber.slice([ hymnNumber.length - 1 ]) : 
+          hymnNumber[ hymnNumber.length - 3 ] === '/' ? 
+          "Himno " + hymnNumber.slice([ hymnNumber.length - 2 ]) :
+          "Buscar himno" }
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>

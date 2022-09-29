@@ -15,7 +15,7 @@ import ListIcon from "@mui/icons-material/List";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
-export default function FixedBottomNavigation() {
+export default function FixedBottomNavigation({ handleFilter, handleIndex }) {
   const location = useLocation();
   const [value, setValue] = React.useState(0);
   const [ currentPage, setCurrentPage ] = React.useState(location.pathname); ;
@@ -31,9 +31,6 @@ export default function FixedBottomNavigation() {
     handleValue();
   }, [ location ]);
 
-
-
-
   return (
     <Box>
       <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
@@ -44,10 +41,11 @@ export default function FixedBottomNavigation() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Índice" icon={<ListIcon />} component={Link} to="/" />
+          <BottomNavigationAction label="Índice" onClick={() => handleIndex()} icon={<ListIcon />} component={Link} to="/" />
           <BottomNavigationAction label="Himno" icon={<AutoStoriesIcon />} onClick={() => { window.history.back() } } />
           {/* <BottomNavigationAction label="Himno" icon={<AutoStoriesIcon />} component={Link} to={"/himno/02"} /> */}
-          <BottomNavigationAction label="Favoritos" icon={<FavoriteIcon />} component={Link} to="/himno/10" />
+          <BottomNavigationAction label="Favoritos" icon={<FavoriteIcon />} onClick={() => handleFilter()} />
+          {/* <BottomNavigationAction label="Favoritos" icon={<FavoriteIcon />} component={Link} to="/himno/10" /> */}
         </BottomNavigation>
       </Paper>
     </Box>

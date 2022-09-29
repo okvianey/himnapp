@@ -23,10 +23,9 @@ import DarkModeSwitch from './darkModeSwitch';
 import SelectHymn from './selectHymn';
 
 // const pages = [ 'Sign in', 'Log in' ];
-const settings = [ 'Salir' ];
-const sessions = [ 'Iniciar Sesión', 'Crear una cuenta' ];
+const sessions = [ 'signin', 'signup' ];
 
-const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
+const ResponsiveAppBar = ({ isLog, mode, handleIndex }) => {
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -40,13 +39,20 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 2, zIndex: 100 }}>
       {/* <Container maxWidth="xl" sx={{ p: 0 }} > */}
-        <Toolbar disableGutters sx={{ justifyContent: 'space-around' }}>
-          <Link to='/'>
+      <Toolbar disableGutters 
+        sx={{ 
+          justifyContent: { xs: 'space-between', md: 'space-around', }, 
+          alignItems: 'center', 
+        }}>
+          {/* <Link to='/'>
             <img src={mode === "light" ? logo : logoLight} width={110} alt="logo" />
-          </Link>
+          </Link> */}
+        <IconButton onClick={() => handleIndex()} component={Link} to='/' sx={{ width: { xs: '150px', md: '170px', padding:0, margin:0, }}} >
+            <img src={mode === "light" ? logo : logoLight} alt="logo" width={'100%'} />
+          </IconButton>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}> 
-            <DarkModeSwitch />
+            <DarkModeSwitch mode={mode} />
             {/* User Account Mobile */}
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' }, }}>
               <Tooltip title="Abrir settings">
@@ -77,13 +83,26 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
                 onClose={handleCloseUserMenu}
               >
                 { isLog ? 
-                  settings.map((setting) => (
-                  <MenuItem key={setting} color="black" onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>)) :
+                  (
+                    <MenuItem 
+                      key='signout' 
+                      color="black" 
+                      onClick={handleCloseUserMenu} 
+                      component={Link} to={`/signout`}
+                      >
+                      <Typography textAlign="center">{'Salir'}</Typography>
+                    </MenuItem>) :
+
                   sessions.map((session) => (
-                    <MenuItem key={session} color="black" onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{session}</Typography>
+                    <MenuItem 
+                      key={session} 
+                      color="black" 
+                      onClick={handleCloseUserMenu} 
+                      component={Link} to={`/${session}`}
+                      >
+                      <Typography textAlign="center">
+                        { session === 'signin' ? 'Iniciar Sesión' : 'Crear cuenta' }
+                      </Typography>
                     </MenuItem>
                   ))
                 }
@@ -93,23 +112,22 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
               {
                 isLog ? 
-                  settings.map((setting) => (
-                  <Button
-                    key={setting}
-                    onClick={handleCloseUserMenu}
-                    variant='outlined'
-                    sx={{ m: 2, display: 'block' }}
-                  >
-                    {setting}
-                  </Button>
-                  )) :
-                  (
-                    <Box sx={{ display: 'flex'} }>
+                  ( <Button
+                      key='signout'
+                      onClick={handleCloseUserMenu}
+                      variant='outlined'
+                      sx={{ m: 2, display: 'block' }}
+                      component={Link} to={'/signout'}
+                    >
+                    {'Salir'}
+                  </Button> ):
+                  ( <Box sx={{ display: 'flex'} }>
                       <Button
                         key='Crear Cuenta'
                         onClick={handleCloseUserMenu}
                         variant= 'outlined'
                         sx={{ m: 1, display: 'block'}}
+                        component={Link} to={'/signup'}
                       >
                         Crear Cuenta
                       </Button>
@@ -118,6 +136,7 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
                         onClick={handleCloseUserMenu}
                         variant= 'contained'
                         sx={{ m: 1, display: 'block'}}
+                        component={Link} to={'/signin'}
                       >
                         Iniciar Sesión
                       </Button>
@@ -130,7 +149,7 @@ const ResponsiveAppBar = ({ isLog, mode, hymnNumber }) => {
       {/* </Container> */}
       <Divider />
       <Container sx={{ padding: "30px 0 20px 0", display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60px' }}>
-        <SelectHymn hymnNumber={hymnNumber} />
+        <SelectHymn />
       </Container>
     </AppBar>
   );

@@ -1,21 +1,23 @@
 import * as React from "react";
 import { Link } from 'gatsby';
-import Seo from "../components/seo";
 import LayoutSessions from '../components/layoutSessions';
+import Seo from "../components/seo";
 
-import { 
-  Paper,
-  Button,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Box,
-  Grid,
-  Typography,
- } from "@mui/material";
+import {
+  Paper
+} from "@mui/material";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 
-const SignIn = () => {
+const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,12 +30,11 @@ const SignIn = () => {
   return (
     <LayoutSessions>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '500px',
-        margin: '0 auto' }}>
+      margin: '0 auto' }}>
         <Paper elevation={4}>
           <Typography component="h1" variant="h5" align="center" sx={{ mt: 5, }}>
-            Ingresa a tu cuenta
+            Crear una cuenta
           </Typography>
-            
           <Box component="form" onSubmit={handleSubmit} noValidate
             sx={{
               m: '2rem 1rem',
@@ -42,8 +43,18 @@ const SignIn = () => {
               margin="normal"
               required
               fullWidth
+              id="name"
+              label="Nombre"
+              name="name"
+              autoComplete="name"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -53,14 +64,10 @@ const SignIn = () => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -68,17 +75,12 @@ const SignIn = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Iniciar Sesión
+              Crear
             </Button>
-            <Grid container alignItems={'center'} mt={2} sx={{ flexDirection: { xs: 'column ', md: 'row' }, }}>
-              {/* <Grid item xs py={'10px'}>
-                <Button component={Link} to={'/'} size="small" variant="text" >
-                  ¿Olvidaste tu contraseña?
-                </Button>
-              </Grid> */}
+            <Grid container alignItems={'center'} mt={2}>
               <Grid item>
-                <Button component={Link} to={'/signup'} size="small" variant="text" >
-                  ¿Aún no tienes una cuenta?
+                <Button component={Link} to={'/signin'} size="small" variant="text" >
+                  ¿Ya tienes una cuenta?
                 </Button>
               </Grid>
             </Grid>
@@ -86,8 +88,9 @@ const SignIn = () => {
         </Paper>
       </Box>
     </LayoutSessions>
+      
   )
 }
 
-export const Head = () => <Seo title="Iniciar sesión" />
-export default SignIn;
+export const Head = () => <Seo title="Crear cuenta" />
+export default SignUp;

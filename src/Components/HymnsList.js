@@ -15,9 +15,6 @@ import {
   Typography
 } from '@mui/material';
 
-//HardCode
-// const himnos = [ 'Himnos', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20' ];
-
 export default function HymnsList() {
   const [ checked, setChecked ] = React.useState([ 5 ]);
 
@@ -42,7 +39,7 @@ export default function HymnsList() {
         bgcolor: 'background.paper' 
         }}>
         <Box>
-          <Typography variant='h1'>Índice</Typography>
+        <Typography component='h1' variant='h5' >Índice</Typography>
           <List
             sx={{
               bgcolor: 'background.paper',
