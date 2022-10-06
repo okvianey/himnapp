@@ -1,49 +1,49 @@
 import * as React from "react";
-import { Link, graphql } from 'gatsby';
+import { Link, graphql } from "gatsby";
 
 import Layout from "../components/layout";
-import Seo from '../components/seo';
-import SearchBar from '../components/searchBar';
+import Seo from "../components/seo";
+import SearchBar from "../components/searchBar";
 
-import { styled } from '@mui/material/styles';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
+import { styled } from "@mui/material/styles";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 import {
   List,
   ListItem,
   ListItemButton,
   Checkbox,
-  Typography
-} from '@mui/material';
+  Typography,
+  Box,
+} from "@mui/material";
 
-const StyledSearchBox = styled('div')(({ theme }) => ({
+const StyledSearchBox = styled("div")(({ theme }) => ({
   padding: 20,
-  border: '1px dashed grey',
+  border: "1px dashed grey",
   display: "flex",
   justifyContent: "space-between",
-  alignItems: 'center',
-  [ theme.breakpoints.down('sm') ]: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+  alignItems: "center",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
 }));
 
-const IndexPage = ({ data }) => {  
-
+const IndexPage = ({ data }) => {
   const himnarioCompleto = data.allMdx.nodes;
-  const [ himnario, setHimnario ] = React.useState(data.allMdx.nodes);
-  
+  const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
+
   const handleSearch = (e) => {
     e.preventDefault();
-    let checkWord = '' + e.target.value.toUpperCase();
-    let himnosFiltrados = himnarioCompleto.filter((himno) => himno.frontmatter.title.includes(checkWord));
+    let checkWord = "" + e.target.value.toUpperCase();
+    let himnosFiltrados = himnarioCompleto.filter((himno) =>
+      himno.frontmatter.title.includes(checkWord)
+    );
     setHimnario(himnosFiltrados);
-  }
-  
-  // Favorites selection
-  const [ favorites, setFavorites ] = React.useState([]);
-  const [ showFilter, setShowFilter ] = React.useState(false);
+  };
 
+  // Favorites selection
+  const [favorites, setFavorites] = React.useState([]);
 
   // React.useEffect(() => {
   //   window.localStorage.setItem('favorite-hymns', favorites)
@@ -51,7 +51,7 @@ const IndexPage = ({ data }) => {
 
   const handleToggle = (value) => () => {
     const currentIndex = favorites.indexOf(value);
-    const newFavorite = [ ...favorites ];
+    const newFavorite = [...favorites];
 
     if (currentIndex === -1) {
       newFavorite.push(value);
@@ -59,36 +59,64 @@ const IndexPage = ({ data }) => {
       newFavorite.splice(currentIndex, 1);
     }
     setFavorites(newFavorite);
-
   };
 
-  // Favorite filter
-  const handleFilter = () => {
-    setShowFilter(true);
+  // Filter Favorites
+  const [filterFavorites, setFilterFavorites] = React.useState([]);
+  const [ showFavorites, setShowFavorites ] = React.useState(false);
+
+  const handleShowFavorites = () => {
+    setShowFavorites(true);
+  };
+
+  const handleShowIndex = () => {
+    setShowFavorites(false);
+  };
+  
+  const sortFavorites = () => {
+    let sortedFavorites = [];
+    
+    if (favorites.length > 0) {
+      sortedFavorites = favorites.slice();
+
+      for (let i = 0; i < sortedFavorites.length; i++){
+        let swapped = false;
+        
+        for( let j = 0; j < sortedFavorites.length - 1; j++){
+          if (sortedFavorites[ i ].frontmatter.order < sortedFavorites[ j ].frontmatter.order){
+            let temp = sortedFavorites[i];
+            sortedFavorites[i] = sortedFavorites[j];
+            sortedFavorites[j] = temp;
+            swapped = true;
+          } else {
+            swapped = false;
+          }
+        }
+      }
+    }
+
+    setFilterFavorites(sortedFavorites);
   }
 
-  const handleIndex = () => {
-    setShowFilter(false);
-  }
+  React.useEffect(()=>{
+    sortFavorites();
+  }, [showFavorites]);
 
   return (
-    <Layout handleFilter={handleFilter} handleIndex={handleIndex} >
-        <StyledSearchBox>
-          <Typography variant='h1' mb={2}>Índice</Typography>
-          <SearchBar handleSearch={handleSearch} />
-        </StyledSearchBox>
-        { showFilter ?
-        (<List sx={{ bgcolor: 'background.paper', overflow: 'auto', }}>
+    <Layout handleShowFavorites={handleShowFavorites} handleShowIndex={handleShowIndex}>
+      {showFavorites ? (
+        <Box>
+          
+          <StyledSearchBox>
+            <Typography variant="h1" mb={2}>
+              Himnos favoritos
+            </Typography>
+            {/* <SearchBar handleSearch={handleSearch} /> */}
+          </StyledSearchBox>
+          <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+            {filterFavorites.map((node) => {
+              const labelId = `checkbox-list-secondary-label-${node.id}`;
 
-          {favorites.map((node) => {
-            const labelId = `checkbox-list-secondary-label-${node.id}`;
-
-            if (node.frontmatter.slug === "0") {
-              return (
-                <ListItem key={node.id}>
-                </ListItem>
-              );
-            } else {
               return (
                 <ListItem
                   key={node.id}
@@ -98,65 +126,77 @@ const IndexPage = ({ data }) => {
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
                       onChange={handleToggle(node)}
-                      checked={favorites.indexOf(node) !== -1}
-                      inputProps={{ 'aria-labelledby': labelId }}
+                      checked={filterFavorites.indexOf(node) !== -1}
+                      inputProps={{ "aria-labelledby": labelId }}
                     />
                   }
                   disablePadding
                   divider
                 >
-                  <ListItemButton color='inherit' component={Link} to={`/himno/${node.frontmatter.slug}`} >
+                  <ListItemButton
+                    color="inherit"
+                    component={Link}
+                    to={`/himno/${node.frontmatter.slug}`}
+                  >
                     {node.frontmatter.title}
                   </ListItemButton>
                 </ListItem>
               );
-            }
-          })}
-        </List> ):
-        (<List sx={{ bgcolor: 'background.paper', overflow: 'auto', }}>
+            })}
+          </List>
+        </Box>
+      ) : (
+        <Box>
+          <StyledSearchBox>
+            <Typography variant="h1" mb={2}>
+              Índice
+            </Typography>
+            <SearchBar handleSearch={handleSearch} />
+          </StyledSearchBox>
+          <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+            {himnario.map((node) => {
+              const labelId = `checkbox-list-secondary-label-${node.id}`;
 
-          {himnario.map((node) => {
-            const labelId = `checkbox-list-secondary-label-${node.id}`;
-
-            if (node.frontmatter.slug === "0") {
-              return (
-                <ListItem key={node.id}>
-                </ListItem>
-              );
-            } else {
-              return (
-                <ListItem
-                  key={node.id}
-                  secondaryAction={
-                    <Checkbox
-                      edge="end"
-                      icon={<FavoriteBorder />}
-                      checkedIcon={<Favorite />}
-                      onChange={handleToggle(node)}
-                      checked={favorites.indexOf(node) !== -1}
-                      inputProps={{ 'aria-labelledby': labelId }}
-                    />
-                  }
-                  disablePadding
-                  divider
-                >
-                  <ListItemButton color='inherit' component={Link} to={`/himno/${node.frontmatter.slug}`} >
-                    {node.frontmatter.title}
-                  </ListItemButton>
-                </ListItem>
-              );
-            }
-          })}
-        </List>)
-        }
-        
+              if (node.frontmatter.slug === "0") {
+                return <ListItem key={node.id}></ListItem>;
+              } else {
+                return (
+                  <ListItem
+                    key={node.id}
+                    secondaryAction={
+                      <Checkbox
+                        edge="end"
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                        onChange={handleToggle(node)}
+                        checked={favorites.indexOf(node) !== -1}
+                        inputProps={{ "aria-labelledby": labelId }}
+                      />
+                    }
+                    disablePadding
+                    divider
+                  >
+                    <ListItemButton
+                      color="inherit"
+                      component={Link}
+                      to={`/himno/${node.frontmatter.slug}`}
+                    >
+                      {node.frontmatter.title}
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+            })}
+          </List>
+        </Box>
+      )}
     </Layout>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query {
-    allMdx(sort: {fields: frontmatter___order, order: ASC}) {
+    allMdx(sort: { fields: frontmatter___order, order: ASC }) {
       nodes {
         id
         frontmatter {
@@ -167,7 +207,7 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
-export const Head = () => <Seo title="Himnario" />
+export const Head = () => <Seo title="Himnario" />;
 export default IndexPage;

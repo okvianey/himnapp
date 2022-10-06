@@ -19,7 +19,7 @@ const HimnoPage = ({ data, children }) => {
   const shortcodes = { Link }
 
   return (
-    <Layout >
+    <Layout>
       <Paper  sx={{ padding: "50px 10px", }}>
         <Typography variant="h1" align="center" gutterBottom>
           {data.mdx.frontmatter.title}

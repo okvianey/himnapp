@@ -7,8 +7,8 @@ import {
   Paper,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
+  // FormControlLabel,
+  // Checkbox,
   Box,
   Grid,
   Typography,
@@ -46,7 +46,7 @@ const SignIn = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              // autoFocus
             />
             <TextField
               margin="normal"
@@ -58,10 +58,10 @@ const SignIn = () => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
