@@ -49,20 +49,32 @@ const IndexPage = ({ data }) => {
   //   window.localStorage.setItem('favorite-hymns', favorites)
   // }, [ favorites ]);
 
+  //sort values added to the favoties array
+  const sorting = (arr, node) => {
+    if(arr.length > 0 ){
+      for (let i = 0; i < arr.length; i++){
+        if(node.frontmatter.order < arr[i].frontmatter.order){
+          return arr.splice(i, 0, node);
+        }
+      }
+    }
+    arr.push(node);
+  }
+
+  // Function to check and and favorites hymns
   const handleToggle = (value) => () => {
     const currentIndex = favorites.indexOf(value);
     const newFavorite = [...favorites];
 
     if (currentIndex === -1) {
-      newFavorite.push(value);
+      // calling sorting function
+      sorting(newFavorite, value);
     } else {
       newFavorite.splice(currentIndex, 1);
     }
     setFavorites(newFavorite);
   };
 
-  // Filter Favorites
-  const [filterFavorites, setFilterFavorites] = React.useState([]);
   const [ showFavorites, setShowFavorites ] = React.useState(false);
 
   const handleShowFavorites = () => {
@@ -72,35 +84,6 @@ const IndexPage = ({ data }) => {
   const handleShowIndex = () => {
     setShowFavorites(false);
   };
-  
-  const sortFavorites = () => {
-    let sortedFavorites = [];
-    
-    if (favorites.length > 0) {
-      sortedFavorites = favorites.slice();
-
-      for (let i = 0; i < sortedFavorites.length; i++){
-        let swapped = false;
-        
-        for( let j = 0; j < sortedFavorites.length - 1; j++){
-          if (sortedFavorites[ i ].frontmatter.order < sortedFavorites[ j ].frontmatter.order){
-            let temp = sortedFavorites[i];
-            sortedFavorites[i] = sortedFavorites[j];
-            sortedFavorites[j] = temp;
-            swapped = true;
-          } else {
-            swapped = false;
-          }
-        }
-      }
-    }
-
-    setFilterFavorites(sortedFavorites);
-  }
-
-  React.useEffect(()=>{
-    sortFavorites();
-  }, [showFavorites]);
 
   return (
     <Layout handleShowFavorites={handleShowFavorites} handleShowIndex={handleShowIndex}>
@@ -114,7 +97,7 @@ const IndexPage = ({ data }) => {
             {/* <SearchBar handleSearch={handleSearch} /> */}
           </StyledSearchBox>
           <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
-            {filterFavorites.map((node) => {
+            {favorites.map((node) => {
               const labelId = `checkbox-list-secondary-label-${node.id}`;
 
               return (
@@ -126,7 +109,7 @@ const IndexPage = ({ data }) => {
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
                       onChange={handleToggle(node)}
-                      checked={filterFavorites.indexOf(node) !== -1}
+                      checked={favorites.indexOf(node) !== -1}
                       inputProps={{ "aria-labelledby": labelId }}
                     />
                   }
