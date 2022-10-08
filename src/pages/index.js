@@ -42,6 +42,12 @@ const IndexPage = ({ data }) => {
     setHimnario(himnosFiltrados);
   };
 
+  //Sign in and Sign up 
+
+  const [user, setUser] = React.useState({});
+  const [ isLog, setIsLog ] = React.useState(false);
+
+
   // Favorites selection
   const [favorites, setFavorites] = React.useState([]);
 
@@ -62,7 +68,7 @@ const IndexPage = ({ data }) => {
   }
 
   // Function to check and and favorites hymns
-  const handleToggle = (value) => () => {
+  const handleToggleFavorites = (value) => () => {
     const currentIndex = favorites.indexOf(value);
     const newFavorite = [...favorites];
 
@@ -86,10 +92,9 @@ const IndexPage = ({ data }) => {
   };
 
   return (
-    <Layout handleShowFavorites={handleShowFavorites} handleShowIndex={handleShowIndex}>
+    <Layout handleShowFavorites={handleShowFavorites} handleShowIndex={handleShowIndex} isLog={isLog} setIsLog={setIsLog}>
       {showFavorites ? (
-        <Box>
-          
+        <Box className="favorites-list">   
           <StyledSearchBox>
             <Typography variant="h1" mb={2}>
               Himnos favoritos
@@ -108,7 +113,7 @@ const IndexPage = ({ data }) => {
                       edge="end"
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
-                      onChange={handleToggle(node)}
+                      onChange={handleToggleFavorites(node)}
                       checked={favorites.indexOf(node) !== -1}
                       inputProps={{ "aria-labelledby": labelId }}
                     />
@@ -128,51 +133,88 @@ const IndexPage = ({ data }) => {
             })}
           </List>
         </Box>
-      ) : (
-        <Box>
-          <StyledSearchBox>
-            <Typography variant="h1" mb={2}>
-              Índice
-            </Typography>
-            <SearchBar handleSearch={handleSearch} />
-          </StyledSearchBox>
-          <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
-            {himnario.map((node) => {
-              const labelId = `checkbox-list-secondary-label-${node.id}`;
+      ) : isLog ? 
+          (
+            <Box className="hymns-list-with-favorites">
+              <StyledSearchBox>
+                <Typography variant="h1" mb={2}>
+                  Índice
+                </Typography>
+                <SearchBar handleSearch={handleSearch} />
+              </StyledSearchBox>
+              <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+                {himnario.map((node) => {
+                  const labelId = `checkbox-list-secondary-label-${node.id}`;
 
-              if (node.frontmatter.slug === "0") {
-                return <ListItem key={node.id}></ListItem>;
-              } else {
-                return (
-                  <ListItem
-                    key={node.id}
-                    secondaryAction={
-                      <Checkbox
-                        edge="end"
-                        icon={<FavoriteBorder />}
-                        checkedIcon={<Favorite />}
-                        onChange={handleToggle(node)}
-                        checked={favorites.indexOf(node) !== -1}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    }
-                    disablePadding
-                    divider
-                  >
-                    <ListItemButton
-                      color="inherit"
-                      component={Link}
-                      to={`/himno/${node.frontmatter.slug}`}
-                    >
-                      {node.frontmatter.title}
-                    </ListItemButton>
-                  </ListItem>
-                );
-              }
-            })}
-          </List>
-        </Box>
-      )}
+                  if (node.frontmatter.slug === "0") {
+                    return <ListItem key={node.id}></ListItem>;
+                  } else {
+                    return (
+                      <ListItem
+                        key={node.id}
+                        secondaryAction={
+                          <Checkbox
+                            edge="end"
+                            icon={<FavoriteBorder />}
+                            checkedIcon={<Favorite />}
+                            onChange={handleToggleFavorites(node)}
+                            checked={favorites.indexOf(node) !== -1}
+                            inputProps={{ "aria-labelledby": labelId }}
+                          />
+                        }
+                        disablePadding
+                        divider
+                      >
+                        <ListItemButton
+                          color="inherit"
+                          component={Link}
+                          to={`/himno/${node.frontmatter.slug}`}
+                        >
+                          {node.frontmatter.title}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  }
+                })}
+              </List>
+            </Box>
+          ) :
+          (
+            <Box className="hymns-list">
+              <StyledSearchBox>
+                <Typography variant="h1" mb={2}>
+                  Índice
+                </Typography>
+                <SearchBar handleSearch={handleSearch} />
+              </StyledSearchBox>
+              <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+                {himnario.map((node) => {
+                  const keyId = node.id;
+
+                  if (node.frontmatter.slug === "0") {
+                    return <ListItem key={keyId}></ListItem>;
+                  } else {
+                    return (
+                      <ListItem
+                        key={keyId}
+                        disablePadding
+                        divider
+                      >
+                        <ListItemButton
+                          color="inherit"
+                          component={Link}
+                          to={`/himno/${node.frontmatter.slug}`}
+                        >
+                          {node.frontmatter.title}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  }
+                })}
+              </List>
+            </Box>
+          )
+      }
     </Layout>
   );
 };

@@ -9,10 +9,10 @@ import {
   Box,
   Typography,
   Paper,
-  Fab,
+  // Fab,
 } from "@mui/material";
 
-import { ArrowRightIcon, ArrowLeftIcon } from '@mui/icons-material/';
+// import { ArrowRightIcon, ArrowLeftIcon } from '@mui/icons-material/';
 
 
 const HimnoPage = ({ data, children }) => {
@@ -38,12 +38,6 @@ const HimnoPage = ({ data, children }) => {
             <MDXProvider components={shortcodes}>
               {children}
             </MDXProvider>
-            {/* <Fab color="primary" aria-label="add">
-              <ArrowLeftIcon />
-            </Fab>
-            <Fab color="primary" aria-label="add">
-             <ArrowRightIcon />
-            </Fab> */}
         </Box>
       </Paper>
     </Layout>

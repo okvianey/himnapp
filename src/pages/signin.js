@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from 'gatsby';
 import Seo from "../components/seo";
-import LayoutSessions from '../components/layoutSessions';
+import Layout from "../components/layout";
 
 import { 
   Paper,
@@ -26,7 +26,7 @@ const SignIn = () => {
   };
 
   return (
-    <LayoutSessions>
+    <Layout>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '500px',
         margin: '0 auto' }}>
         <Paper elevation={4}>
@@ -85,7 +85,7 @@ const SignIn = () => {
           </Box>
         </Paper>
       </Box>
-    </LayoutSessions>
+    </Layout>
   )
 }
 

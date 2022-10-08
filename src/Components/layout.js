@@ -1,4 +1,9 @@
 import * as React from "react";
+import { useLocation, 
+  // createHistory, 
+  // navigate 
+} from "@reach/router";
+
 
 import FixedBottomNavigation from "./fixedBottomNavigation";
 import ResponsiveAppBar from "./responsiveAppBar";
@@ -7,8 +12,12 @@ import { ColorModeContext } from "./context";
 
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+// import { LocationSearching } from "@mui/icons-material";
 
-const Layout = ({ children, handleShowFavorites, handleShowIndex }) => {
+
+const Layout = ({ children, handleShowFavorites, handleShowIndex, isLog, setIsLog }) => {
+  const location = useLocation();
+
   // Dark Mode
   const colorStorage = window.localStorage.getItem("color-mode");
   const systemColor = window.matchMedia("(prefers-color-scheme: dark)");
@@ -95,19 +104,37 @@ const Layout = ({ children, handleShowFavorites, handleShowIndex }) => {
   // });
 
   //Sign in
-  const [isLog, setIsLog] = React.useState(false);
+  
+  // const location = useLocation();
+  // window.localStorage.setItem(history, myHistory);
+ 
+  // const handleBack = () => {
+  //   if (location.pathname !== "/"){
+  //     navigate(-1);
+  //   } 
+  //   navigate(-1)
+  // }
+
+
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ResponsiveAppBar mode={mode} isLog={isLog} showIndex={handleShowIndex} />
+        <ResponsiveAppBar 
+          mode={mode} 
+          isLog={isLog} 
+          setIsLog={setIsLog}
+          showIndex={handleShowIndex} 
+          location={location} />
         <Container sx={{ padding: "180px 10px", maxWidth: { md: "600px" } }}>
           {children}
         </Container>
         <FixedBottomNavigation
           showFavorites={handleShowFavorites}
           showIndex={handleShowIndex}
+          // handleBack={handleBack}
+          isLog={isLog} 
         />
       </ThemeProvider>
     </ColorModeContext.Provider>

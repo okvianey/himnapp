@@ -39,7 +39,7 @@ export default function HymnsList() {
         bgcolor: 'background.paper' 
         }}>
         <Box>
-        <Typography component='h1' variant='h5' >Índice</Typography>
+        <Typography component='h1' variant='h5 ' >Índice</Typography>
           <List
             sx={{
               bgcolor: 'background.paper',

@@ -58,12 +58,12 @@ export default function DarkModeSwitch({ mode }) {
 
   const [check, setCheck] = React.useState(true);
 
-  const toggleDefaultChecked = () => {
-    mode === 'dark' ? setCheck(true) : setCheck(false);
-  }
-
   React.useEffect(()=> {
-    toggleDefaultChecked()
+    const toggleDefaultChecked = () => {
+      mode === 'dark' ? setCheck(true) : setCheck(false);
+    }
+    
+    toggleDefaultChecked();
   }, [mode])
 
   return (

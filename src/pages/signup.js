@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from 'gatsby';
-import LayoutSessions from '../components/layoutSessions';
+import Layout from '../components/layout';
 import Seo from "../components/seo";
 
 import {
@@ -24,8 +24,23 @@ const SignUp = () => {
     });
   };
 
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleInput = (e) => {
+    let inputName = e.target.name;
+    console.log("🚀 ~ file: signup.js ~ line 33 ~ handleInput ~ inputName", inputName)
+
+    inputName === "name" ?
+      setName(e.target.value) :
+      inputName === "email" ?
+      setEmail(e.target.value) :
+      setPassword(e.target.value);
+  }
+
   return (
-    <LayoutSessions>
+    <Layout>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '500px',
       margin: '0 auto' }}>
         <Paper elevation={4}>
@@ -44,6 +59,7 @@ const SignUp = () => {
               label="Nombre"
               name="name"
               autoComplete="name"
+              onChange={handleInput}
               // autoFocus
             />
             <TextField
@@ -84,7 +100,7 @@ const SignUp = () => {
           </Box>
         </Paper>
       </Box>
-    </LayoutSessions>
+    </Layout>
       
   )
 }
