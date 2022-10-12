@@ -11,15 +11,22 @@ import {
   Paper,
   // Fab,
 } from "@mui/material";
+import { UserContext } from '../../components/context';
 
 // import { ArrowRightIcon, ArrowLeftIcon } from '@mui/icons-material/';
 
 
 const HimnoPage = ({ data, children }) => {
   const shortcodes = { Link }
+  const handleUser = React.useContext(UserContext);
+  const isLog = handleUser.isLog;
+  // const logStatus = localStorage.getItem("log-status");
+  // React.useEffect(() => {
+  //   const logStatus = localStorage.getItem("log-status");
+  // }, [])
 
   return (
-    <Layout>
+    <Layout isLog={isLog} >
       <Paper  sx={{ padding: "50px 10px", }}>
         <Typography variant="h1" align="center" gutterBottom>
           {data.mdx.frontmatter.title}

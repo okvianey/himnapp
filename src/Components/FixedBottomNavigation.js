@@ -11,7 +11,7 @@ import ListIcon from "@mui/icons-material/List";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 // import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
-export default function FixedBottomNavigation({ showFavorites, showIndex, isLog }) {
+export default function FixedBottomNavigation({ showFavorites, handleShowFavorites, handleShowIndex, logged }) {
   const location = useLocation();
   // let history = window.history;
   // console.log("🚀 ~ file: fixedBottomNavigation.js ~ line 17 ~ FixedBottomNavigation ~ history", history)
@@ -25,7 +25,7 @@ export default function FixedBottomNavigation({ showFavorites, showIndex, isLog 
     setCurrentPage(location.pathname);
 
     const handleValue = () => {
-      currentPage.includes("himno") ? setValue(1) : setValue(0);
+      showFavorites ? setValue(1) : setValue(0);
     };
     handleValue();
 
@@ -43,7 +43,7 @@ export default function FixedBottomNavigation({ showFavorites, showIndex, isLog 
         elevation={3}
       >
       {
-        isLog ? 
+        logged ? 
           <BottomNavigation
             showLabels
             value={value}
@@ -53,7 +53,7 @@ export default function FixedBottomNavigation({ showFavorites, showIndex, isLog 
           >
             <BottomNavigationAction
               label="Índice"
-              onClick={showIndex}
+              onClick={handleShowIndex}
               icon={<ListIcon />}
               component={Link}
               to="/"
@@ -63,13 +63,11 @@ export default function FixedBottomNavigation({ showFavorites, showIndex, isLog 
                     icon={<AutoStoriesIcon />}
                     onClick={handleBack}
                   /> */}
-            
-              
-                  <BottomNavigationAction
-                    label="Favoritos"
-                    icon={<FavoriteIcon />}
-                    onClick={showFavorites}
-                  /> 
+            <BottomNavigationAction
+              label="Favoritos"
+              icon={<FavoriteIcon />}
+              onClick={handleShowFavorites}
+            /> 
             
           </BottomNavigation> :
           <BottomNavigation
@@ -81,7 +79,7 @@ export default function FixedBottomNavigation({ showFavorites, showIndex, isLog 
           >
             <BottomNavigationAction
               label="Índice"
-              onClick={showIndex}
+              onClick={handleShowIndex}
               icon={<ListIcon />}
               component={Link}
               to="/"

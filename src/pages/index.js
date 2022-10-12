@@ -1,10 +1,9 @@
 import * as React from "react";
 import { Link, graphql } from "gatsby";
-
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import SearchBar from "../components/searchBar";
-
+import { UserContext } from "../components/context";
 import { styled } from "@mui/material/styles";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
@@ -29,6 +28,7 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
   },
 }));
 
+// Page
 const IndexPage = ({ data }) => {
   const himnarioCompleto = data.allMdx.nodes;
   const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
@@ -43,19 +43,25 @@ const IndexPage = ({ data }) => {
   };
 
   //Sign in and Sign up 
+  const loggedStorage = window.localStorage.getItem("logged");
 
-  const [user, setUser] = React.useState({});
-  const [ isLog, setIsLog ] = React.useState(false);
+  // const handleLogOut = () => {
+  //   localStorage.removeItem("loggedUser");
+  //   setUser({
+  //     id: "",
+  //     name: "",
+  //     email: "",
+  //     goal: "",
+  //     joined: "",
+  //   });
+  //   setIsLog(false);
+  // };
 
 
   // Favorites selection
   const [favorites, setFavorites] = React.useState([]);
 
-  // React.useEffect(() => {
-  //   window.localStorage.setItem('favorite-hymns', favorites)
-  // }, [ favorites ]);
-
-  //sort values added to the favoties array
+  //sort values added to the favorites array
   const sorting = (arr, node) => {
     if(arr.length > 0 ){
       for (let i = 0; i < arr.length; i++){
@@ -92,14 +98,17 @@ const IndexPage = ({ data }) => {
   };
 
   return (
-    <Layout handleShowFavorites={handleShowFavorites} handleShowIndex={handleShowIndex} isLog={isLog} setIsLog={setIsLog}>
-      {showFavorites ? (
-        <Box className="favorites-list">   
+    <Layout
+      handleShowFavorites={handleShowFavorites}
+      handleShowIndex={handleShowIndex}
+      showFavorites={showFavorites}
+    >
+      {showFavorites ?
+        (<Box className="favorites-list">   
           <StyledSearchBox>
             <Typography variant="h1" mb={2}>
               Himnos favoritos
             </Typography>
-            {/* <SearchBar handleSearch={handleSearch} /> */}
           </StyledSearchBox>
           <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
             {favorites.map((node) => {
@@ -132,88 +141,83 @@ const IndexPage = ({ data }) => {
               );
             })}
           </List>
-        </Box>
-      ) : isLog ? 
-          (
-            <Box className="hymns-list-with-favorites">
-              <StyledSearchBox>
-                <Typography variant="h1" mb={2}>
-                  Índice
-                </Typography>
-                <SearchBar handleSearch={handleSearch} />
-              </StyledSearchBox>
-              <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
-                {himnario.map((node) => {
-                  const labelId = `checkbox-list-secondary-label-${node.id}`;
+        </Box>) :
+        loggedStorage ? 
+          (<Box className="hymns-list-with-favorites">
+            <StyledSearchBox>
+              <Typography variant="h1" mb={2}>
+                Índice
+              </Typography>
+              <SearchBar handleSearch={handleSearch} />
+            </StyledSearchBox>
+            <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+              {himnario.map((node) => {
+                const labelId = `checkbox-list-secondary-label-${node.id}`;
 
-                  if (node.frontmatter.slug === "0") {
-                    return <ListItem key={node.id}></ListItem>;
-                  } else {
-                    return (
-                      <ListItem
-                        key={node.id}
-                        secondaryAction={
-                          <Checkbox
-                            edge="end"
-                            icon={<FavoriteBorder />}
-                            checkedIcon={<Favorite />}
-                            onChange={handleToggleFavorites(node)}
-                            checked={favorites.indexOf(node) !== -1}
-                            inputProps={{ "aria-labelledby": labelId }}
-                          />
-                        }
-                        disablePadding
-                        divider
+                if (node.frontmatter.slug === "0") {
+                  return <ListItem key={node.id}></ListItem>;
+                } else {
+                  return (
+                    <ListItem
+                      key={node.id}
+                      secondaryAction={
+                        <Checkbox
+                          edge="end"
+                          icon={<FavoriteBorder />}
+                          checkedIcon={<Favorite />}
+                          onChange={handleToggleFavorites(node)}
+                          checked={favorites.indexOf(node) !== -1}
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      }
+                      disablePadding
+                      divider
+                    >
+                      <ListItemButton
+                        color="inherit"
+                        component={Link}
+                        to={`/himno/${node.frontmatter.slug}`}
                       >
-                        <ListItemButton
-                          color="inherit"
-                          component={Link}
-                          to={`/himno/${node.frontmatter.slug}`}
-                        >
-                          {node.frontmatter.title}
-                        </ListItemButton>
-                      </ListItem>
-                    );
-                  }
-                })}
-              </List>
-            </Box>
-          ) :
-          (
-            <Box className="hymns-list">
-              <StyledSearchBox>
-                <Typography variant="h1" mb={2}>
-                  Índice
-                </Typography>
-                <SearchBar handleSearch={handleSearch} />
-              </StyledSearchBox>
-              <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
-                {himnario.map((node) => {
-                  const keyId = node.id;
+                        {node.frontmatter.title}
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                }})}
+            </List>
+          </Box>) :
+          (<Box className="hymns-list">
+            <StyledSearchBox>
+              <Typography variant="h1" mb={2}>
+                Índice
+              </Typography>
+              <SearchBar handleSearch={handleSearch} />
+            </StyledSearchBox>
+            <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+              {himnario.map((node) => {
+                const keyId = node.id;
 
-                  if (node.frontmatter.slug === "0") {
-                    return <ListItem key={keyId}></ListItem>;
-                  } else {
-                    return (
-                      <ListItem
-                        key={keyId}
-                        disablePadding
-                        divider
+                if (node.frontmatter.slug === "0") {
+                  return <ListItem key={keyId}></ListItem>;
+                } else {
+                  return (
+                    <ListItem
+                      key={keyId}
+                      disablePadding
+                      divider
+                    >
+                      <ListItemButton
+                        color="inherit"
+                        component={Link}
+                        to={`/himno/${node.frontmatter.slug}`}
                       >
-                        <ListItemButton
-                          color="inherit"
-                          component={Link}
-                          to={`/himno/${node.frontmatter.slug}`}
-                        >
-                          {node.frontmatter.title}
-                        </ListItemButton>
-                      </ListItem>
-                    );
-                  }
-                })}
-              </List>
-            </Box>
-          )
+                        {node.frontmatter.title}
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                }
+              })}
+            </List>
+          </Box>)
       }
     </Layout>
   );
