@@ -6,5 +6,12 @@ export const ColorModeContext = React.createContext({
 });
 
 export const UserContext = React.createContext({
-  loadUser: () => { },
+  handleChangeFavorites: () => { },
+  handleToggleFavorites: () => { },
+  favorites: [],
 });
+
+export const LoggedContext = React.createContext({
+  toggleLogged: () => { },
+  log: false,
+})

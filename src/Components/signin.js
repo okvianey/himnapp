@@ -1,4 +1,6 @@
 import * as React from "react";
+import { navigate } from "@reach/router";
+
 
 import { 
   Paper,
@@ -9,11 +11,14 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { UserContext } from "./context";
+import {
+  UserContext,
+  LoggedContext
+} from "./context";
 
 
 const SignIn = ({ setLogged, logged }) => {
-  //Sign in and Sign up 
+  const logStatus = React.useContext(LoggedContext);
   const [ email, setEmail ] = React.useState("");
   const [ password, setPassword ] = React.useState("");
 
@@ -37,7 +42,6 @@ const SignIn = ({ setLogged, logged }) => {
   //     );
   //   }
   // }, []);
- 
 
 
   const handleSubmit = (e) => {
@@ -53,12 +57,13 @@ const SignIn = ({ setLogged, logged }) => {
     })
       .then(response => response.json())
       .then(user => {
+        console.log(user)
         if (user.id) {
-          // const loggedUserJSON = localStorage.setItem("loggedUser", user);
           localStorage.setItem("loggedUser", JSON.stringify(user));
+          // localStorage.setItem("logged", loggedStatus.lo);
           localStorage.setItem("logged", logged);
           setLogged(true);
-          getUser.loadUser(user);
+          navigate("/");
         } else {
           console.log('something went wrong');
         }

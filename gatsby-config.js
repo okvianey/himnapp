@@ -32,7 +32,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: `himnos`,
-        path: `${__dirname}/himnos`,
+        path: `${__dirname}/himnos/`,
       }
     },
     "gatsby-plugin-mdx",

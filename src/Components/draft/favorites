@@ -1,0 +1,62 @@
+import * as React from "react";
+import { graphql } from "gatsby";
+import Layout from "../layout";
+import Seo from "../seo";
+import HymnsList from "../hymnsList";
+// import { UserContext } from "../components/context";
+import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Typography,
+} from "@mui/material";
+
+const StyledSearchBox = styled("div")(({ theme }) => ({
+  padding: 20,
+  border: "1px dashed grey",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  [ theme.breakpoints.down("sm") ]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+}));
+
+// Page
+const Favorites = ({ data }) => {
+  // const himnario = data.allMdx.nodes;
+  // const userStorage = JSON.parse(window.localStorage.getItem("loggedUser"));
+  // const [ favorites, setFavorites ] = React.useState([]);
+
+
+  return (
+    // <UserContext.Provider value={getUser}>
+      <Layout>
+        <Box className="favorites-list">
+          <StyledSearchBox>
+          <Typography variant="h1" mb={2}> Himnos favoritos </Typography>
+        </StyledSearchBox>
+        <HymnsList listName={favorites} checkedList={favorites} />
+        </Box>
+      </Layout>
+    // </UserContext.Provider>
+  );
+};
+
+export const query = graphql`
+  query {
+    allMdx(sort: { fields: frontmatter___order, order: ASC }) {
+      nodes {
+        id
+        frontmatter {
+          order
+          slug
+          title
+        }
+      }
+    }
+  }
+`;
+
+export const Head = () => <Seo title="Himnos Favoritos" />;
+export default Favorites;

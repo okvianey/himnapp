@@ -4,17 +4,14 @@ import { useLocation } from "@reach/router";
 import FixedBottomNavigation from "./fixedBottomNavigation";
 import ResponsiveAppBar from "./responsiveAppBar";
 
-import { ColorModeContext, UserContext } from "./context";
+import {
+  ColorModeContext,
+} from "./context";
 
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-const Layout = ({
-  children,
-  handleShowFavorites,
-  handleShowIndex,
-  showFavorites,
-}) => {
+const Layout = ({ children }) => {
   const location = useLocation();
 
   // Dark Mode
@@ -70,64 +67,20 @@ const Layout = ({
     [mode]
   );
 
-  // Sign in & Sign up
-  const loggedStorage = window.localStorage.getItem("logged");
-  const defaultLogged = loggedStorage ? loggedStorage : false;
-  const [ logged, setLogged ] = React.useState(defaultLogged);
-
-  const [ user, setUser ] = React.useState({
-    id: "",
-    name: "",
-    email: "",
-    joined: "",
-    favorites: []
-  });
-
-  const getUser = React.useMemo(
-    () => ({
-      // The dark mode switch would invoke this method
-      loadUser: (data) => {
-        console.log(data)
-      },
-    }),
-    []
-  );
-
-    
-  
-
-  // React.useEffect(() => {
-  //   const loggedUserJSON = localStorage.getItem("loggedUser");
-  //   if (loggedUserJSON) {
-  //     const user = JSON.parse(loggedUserJSON);
-  //     localStorage.setItem("logged", true);
-  //   }
-  // }, []);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <UserContext.Provider value={getUser}>
-
+          
           <CssBaseline />
           <ResponsiveAppBar 
             mode={mode} 
-            logged={logged} 
-            setLogged={setLogged}
-            showIndex={handleShowIndex} 
             location={location} />
           <Container sx={{ padding: "180px 10px", maxWidth: { md: "600px" } }} >
             {children}
           </Container>
-          <FixedBottomNavigation
-            handleShowFavorites={handleShowFavorites}
-            handleShowIndex={handleShowIndex}
-            showFavorites={showFavorites}
-            // handleBack={handleBack}
-            logged={logged} 
-          />
-        </UserContext.Provider>
-        </ThemeProvider>
+        <FixedBottomNavigation />
+      </ThemeProvider>
     </ColorModeContext.Provider>
   );
 };
