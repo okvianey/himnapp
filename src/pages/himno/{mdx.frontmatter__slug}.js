@@ -20,8 +20,6 @@ const HimnoPage = ({ data, children }) => {
   const location = useLocation();
   const defaultPage = location.pathname.slice(7);
   const page = parseInt(defaultPage);
-  // const textBig = "20px"
-  const [ textSize, setTextSize ] = React.useState("1rem");
 
   return (
     <Layout >

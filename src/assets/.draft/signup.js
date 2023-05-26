@@ -24,9 +24,6 @@ const SignUp = ({ buttonVariant, buttonText }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = new FormData(e.currentTarget);
-    console.log("🚀 ~ file: signup.js ~ line 36 ~ handleSubmit ~ user", user)
-    console.log(name, email, password);
-    
   };
 
   return (

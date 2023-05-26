@@ -1,11 +1,8 @@
 import * as React from "react";
-import { Link } from "gatsby";
 import {
   Box,
   Grid,
-  Paper,
   Button,
-  TextField,
   Divider,
   Typography
 } from "@mui/material";
@@ -41,4 +38,5 @@ function About() {
   )
 }
 
+export const Head = () => <Seo title="Sobre Nosotros" />;
 export default About;

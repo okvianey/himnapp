@@ -13,7 +13,7 @@ import InfoIcon from '@mui/icons-material/Info';
 
 function FixedBottomNavigation({ location }) {
 
-  const [ currentPage, setCurrentPage ] = React.useState(location.pathname);
+  const currentPage = location.pathname;
   const defaultValue = currentPage !== "/" ? 1 : 0
   // const defaultValue = 0;
   const [ value, setValue ] = React.useState(defaultValue);

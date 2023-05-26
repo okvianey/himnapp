@@ -29,7 +29,6 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
 const IndexPage = ({ data }) => {
   const himnarioCompleto = data.allMdx.nodes;
   const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
-  const [ input, setInput ] = React.useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();

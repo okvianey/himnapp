@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link, graphql } from "gatsby";
-import Layout from "../layout";
-import Seo from "../seo";
-import SearchBar from "../searchBar";
+import Layout from "../../components/layout";
+import Seo from "../../components/seo";
+import SearchBar from "../../components/searchBar";
 import {
   Box,
   Typography,
@@ -61,20 +61,20 @@ const Indice = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query {
-    allMdx(sort: { fields: frontmatter___order, order: ASC }) {
-      nodes {
-        id
-        frontmatter {
-          order
-          slug
-          title
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   query {
+//     allMdx(sort: { fields: frontmatter___order, order: ASC }) {
+//       nodes {
+//         id
+//         frontmatter {
+//           order
+//           slug
+//           title
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export const Head = () => <Seo title="Indice" />;
 export default Indice;
