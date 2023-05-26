@@ -1,33 +1,39 @@
 import * as React from 'react';
 import { graphql, Link } from 'gatsby'
+import { useLocation } from "@reach/router";
 import { MDXProvider } from "@mdx-js/react";
 import Layout from '../../components/layout';
 import Seo from '../../components/seo';
 
 import {
-  // Container,
   Box,
   Typography,
   Paper,
-  // Fab,
+  IconButton,
 } from "@mui/material";
-import { UserContext } from '../../components/context';
 
-// import { ArrowRightIcon, ArrowLeftIcon } from '@mui/icons-material/';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+
 
 
 const HimnoPage = ({ data, children }) => {
-  const shortcodes = { Link }
-  const handleUser = React.useContext(UserContext);
-  const isLog = handleUser.isLog;
-  // const logStatus = localStorage.getItem("log-status");
-  // React.useEffect(() => {
-  //   const logStatus = localStorage.getItem("log-status");
-  // }, [])
+  const shortcodes = { Link };
+  const location = useLocation();
+  const defaultPage = location.pathname.slice(7);
+  const page = parseInt(defaultPage);
+  // const textBig = "20px"
+  const [ textSize, setTextSize ] = React.useState("1rem");
+
+
+
+
 
   return (
-    <Layout isLog={isLog} >
-      <Paper  sx={{ padding: "50px 10px", }}>
+    <Layout >
+      <Paper sx={{ padding: "10px 10px", }}>        
+
         <Typography variant="h1" align="center" gutterBottom>
           {data.mdx.frontmatter.title}
         </Typography>
@@ -40,13 +46,48 @@ const HimnoPage = ({ data, children }) => {
             'ol': {
               padding: '10px 0',
               paddingInlineStart: '30px',
+              fontSize: "20px",
             }
           }} >
-            <MDXProvider components={shortcodes}>
-              {children}
-            </MDXProvider>
+
+          <MDXProvider components={shortcodes}>
+            {children}
+          </MDXProvider>
+
+          {/* back page button */}
+          <IconButton
+            disabled={page === 1 ? true : false }
+            sx={{
+              position: "fixed",
+              bottom: "12px",
+              left: "20px",
+              zIndex: "100",
+            }}
+            component={Link}
+            to={`/himno/${page - 1}`}
+          >
+            <ArrowBackIosIcon />
+          </IconButton>
+
+          {/* next page button */}
+          <IconButton
+            disabled={page === 49 ? true : false}
+            sx={{
+              position: "fixed",
+              bottom: "12px",
+              right: "20px",
+              zIndex: "100",
+            }}
+            component={Link}
+            to={`/himno/${page + 1}`}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
         </Box>
+
+
       </Paper>
+
     </Layout>
   );
 };

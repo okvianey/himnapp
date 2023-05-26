@@ -81,6 +81,7 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
                   }}
                   component={Link}
                   to={`/himno/${node.frontmatter.slug}`}
+                  
                 >
                   {node.frontmatter.slug}
                 </MenuItem>

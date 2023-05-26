@@ -11,10 +11,6 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import {
-  UserContext,
-  LoggedContext
-} from "./context";
 
 
 const SignIn = ({ setLogged, logged }) => {

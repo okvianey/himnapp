@@ -5,11 +5,7 @@ export const ColorModeContext = React.createContext({
   colorDefault: () => { }
 });
 
-export const UserContext = React.createContext({
-  handleChangeFavorites: () => { },
-  handleToggleFavorites: () => { },
-  favorites: [],
-});
+
 
 export const LoggedContext = React.createContext({
   toggleLogged: () => { },

@@ -17,7 +17,7 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
   padding: 20,
   border: "1px dashed grey",
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "space-evenly",
   alignItems: "center",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
@@ -29,6 +29,7 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
 const IndexPage = ({ data }) => {
   const himnarioCompleto = data.allMdx.nodes;
   const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
+  const [ input, setInput ] = React.useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -44,11 +45,11 @@ const IndexPage = ({ data }) => {
     <Box className="hymns-list-with-favorites">
       {/*Search Bar  */}
       <StyledSearchBox>
-        <Typography variant="h1" mb={2}> Índice </Typography>
+        <Typography variant="h1" mb={2}> Buscar himno: </Typography>
         <SearchBar handleSearch={handleSearch} />
       </StyledSearchBox>
-
-      (<List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+        
+      <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
         {himnario.map((node) => {
           const keyId = node.id;
 
@@ -68,7 +69,7 @@ const IndexPage = ({ data }) => {
             );
           }
         })}
-      </List>)
+      </List>
 
     </Box>
     </Layout>

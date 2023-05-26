@@ -1,24 +1,44 @@
 import * as React from "react";
 import { Link } from "gatsby";
-
 import {
   AppBar,
   Box,
   Toolbar,
-  IconButton,
   Menu,
-  Container,
   Divider,
+  IconButton,
+  Button,
+  ButtonGroup,
 } from "@mui/material/";
+import { styled } from '@mui/material/styles';
 
+import {
+  TextIncrease,
+  TextDecrease,
+} from '@mui/icons-material';
 import logo from "../images/logo.svg";
 import logoLight from "../images/logo-white.svg";
-
 import DarkModeSwitch from "./darkModeSwitch";
 import SelectHymn from "./selectHymn";
 
-const ResponsiveAppBar = ({ mode }) => {
+const TextZoomBox = styled('div')(({ theme }) => ({
+  padding: "15px 10px 0 10px",
+  display: "flex",
+  justifyContent: "space-evenly",
+  [ theme.breakpoints.down('sm') ]: {
+    flexDirection: "column",
+    alignItems: "center",
+  }
+}))
 
+const ResponsiveAppBar = ({
+  mode,
+  location,
+  handleTextSizeUp,
+  handleTextSizeDown,
+  textSize,
+}) => {
+  
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   // const handleOpenUserMenu = (event) => {
@@ -32,7 +52,13 @@ const ResponsiveAppBar = ({ mode }) => {
 
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "background.default", p: 2, zIndex: 100 }}>
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: "background.default",
+        padding: "16px 10px 0 10px",
+        zIndex: 100
+      }}>
       <Toolbar
         disableGutters
         sx={{
@@ -40,10 +66,13 @@ const ResponsiveAppBar = ({ mode }) => {
           alignItems: "center",
         }}
       >
-        <IconButton className="logo"
+        <IconButton
+          className={"styles.cont"}
           component={Link}
           to="/"
-          sx={{ width: { xs: "150px", md: "170px", padding: 0, margin: 0 } }}
+          sx={{
+            width: { xs: "150px", md: "170px", "borderRadius": "0", }
+          }}
         >
           <img
             src={mode === "light" ? logo : logoLight}
@@ -52,53 +81,68 @@ const ResponsiveAppBar = ({ mode }) => {
           />
         </IconButton>
 
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <DarkModeSwitch mode={mode} />
-          {/* User Account Mobile */}
-          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-
-            <Menu
-              className="mobile-nav-links"
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center"
+          }}>
+            <DarkModeSwitch mode={mode} />
+            {/* User Account Mobile */}
+            <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
+              <Menu
+                className="mobile-nav-links"
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+              </Menu>
+            </Box>
+            {/* User Account Desktop */}
+            <Box className="desktop-nav-links"
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "flex-end",
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-            </Menu>
-          </Box>
-          {/* User Account Desktop */}
-          <Box className="desktop-nav-links"
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end",
-            }}
-          >
-          </Box>
+            </Box>
         </Box>
       </Toolbar>
+
       <Divider />
-      <Container
-        sx={{
-          padding: "30px 0 20px 0",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "60px",
-        }}
-      >
-        <SelectHymn />
-      </Container>
+
+      {location.pathname === "/" ? 
+        <br /> :
+        <TextZoomBox>
+          <SelectHymn />
+          <Box m={"5px"}>
+            <ButtonGroup
+              size="small"
+              color="secondary"
+              variant="outlined"
+            >
+              <Button
+                disabled={textSize === 14 ? true : false}
+                onClick={handleTextSizeDown}><TextDecrease /></Button>
+              <Button
+                disabled={textSize === 29 ? true : false}
+                onClick={handleTextSizeUp}
+              ><TextIncrease /></Button>
+            </ButtonGroup>
+          </Box>
+        </TextZoomBox>   
+      }
     </AppBar>
   );
 };

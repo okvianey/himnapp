@@ -1,13 +1,8 @@
 import * as React from "react";
 import { useLocation } from "@reach/router";
-
-import FixedBottomNavigation from "./fixedBottomNavigation";
+import { ColorModeContext } from "./context";
 import ResponsiveAppBar from "./responsiveAppBar";
-
-import {
-  ColorModeContext,
-} from "./context";
-
+import FixedBottomNavigation from "./fixedBottomNavigation";
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -67,19 +62,52 @@ const Layout = ({ children }) => {
     [mode]
   );
 
+  // Text Size
+  const textStorage = window.localStorage.getItem("textSizeStorage");
+  const textSizeStorage = parseInt(textStorage);
+  const textSizeDefault = textSizeStorage !== 16 ? textSizeStorage : 16;
+  const [ textSize, setTextSize ] = React.useState(textSizeDefault);
+  
+  const handleTextSizeUp = () => {
+    console.log(typeof textSizeStorage)
+    textSize < 30 ? setTextSize(textSize + 1) : setTextSize(16); 
+    console.log("text size", textSize);
+  }
+  const handleTextSizeDown = () => {
+    textSize >= 12 ? setTextSize(textSize - 1) : setTextSize(textSize);
+    console.log("text size down", textSize);
+  }
+
+  React.useEffect(() => {
+    window.localStorage.setItem("textSizeStorage", textSize);
+    // handleTextSizeUp();
+  }, [ textSize ])
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-          
-          <CssBaseline />
-          <ResponsiveAppBar 
-            mode={mode} 
-            location={location} />
-          <Container sx={{ padding: "180px 10px", maxWidth: { md: "600px" } }} >
-            {children}
-          </Container>
-        <FixedBottomNavigation />
+      <ThemeProvider theme={theme}> 
+
+        <CssBaseline />
+        <ResponsiveAppBar 
+          mode={mode} 
+          location={location}
+          handleTextSizeUp={handleTextSizeUp}
+          handleTextSizeDown={handleTextSizeDown}
+          textSize={textSize}
+        />
+
+        <Container
+          sx={{
+            padding: "180px 10px",
+            maxWidth: { md: "600px" }, 
+            'ol p': {
+              fontSize: `${textSize}px`,
+            }
+          }} >
+          {children}
+        </Container>
+        <FixedBottomNavigation location={location} />
+
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
