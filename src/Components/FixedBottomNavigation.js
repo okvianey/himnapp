@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, navigate } from "gatsby";
+import { Link } from "gatsby";
 import {
   Box,
   Paper,
@@ -7,8 +7,9 @@ import {
   BottomNavigationAction,
 } from "@mui/material/";
 import ListIcon from "@mui/icons-material/List";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import InfoIcon from '@mui/icons-material/Info';
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 function FixedBottomNavigation({ location }) {
 
@@ -42,6 +43,16 @@ function FixedBottomNavigation({ location }) {
             component={Link}
             to="/"
           />
+
+          {!currentPage.includes("/himno") ? 
+            <BottomNavigationAction
+              label="Info"
+              icon={<InfoIcon />}
+              component={Link}
+              to="/about"
+            /> :
+            <br />
+          }
 
         </BottomNavigation> 
           

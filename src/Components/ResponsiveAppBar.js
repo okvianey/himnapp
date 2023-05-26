@@ -122,7 +122,7 @@ const ResponsiveAppBar = ({
 
       <Divider />
 
-      {location.pathname === "/" ? 
+      {location.pathname === "/" || location.pathname === "/about" ? 
         <br /> :
         <TextZoomBox>
           <SelectHymn />

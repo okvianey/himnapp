@@ -54,6 +54,12 @@ const Layout = ({ children }) => {
           h1: {
             fontSize: "2.1rem",
           },
+          h2: {
+            fontSize: "1.8rem",
+          },
+          h3: {
+            fontSize: "1.3rem",
+          },
           body2: {
             fontSize: "1.5rem",
           },
