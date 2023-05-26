@@ -1,5 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import Layout from "../components/layout"
+import { Typography } from "@mui/material"
 
 const pageStyles = {
   color: "#232129",
@@ -25,22 +27,15 @@ const codeStyles = {
 
 const NotFoundPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Página no encontrada</h1>
-      <p style={paragraphStyles}>
-        Lo sentimos 😔, no pudimos encontrar lo que estás buscando.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Ir al inicio</Link>.
-      </p>
-    </main>
+    <Layout>
+      <main>
+        <Typography variant="h1">Página no encontrada</Typography>
+        <p style={paragraphStyles}>
+          Lo sentimos 😔, no pudimos encontrar lo que estás buscando.
+          <Link to="/"> Ir al inicio </Link>.
+        </p>
+      </main>
+    </Layout>
   )
 }
 
