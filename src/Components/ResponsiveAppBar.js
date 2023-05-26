@@ -129,7 +129,7 @@ const ResponsiveAppBar = ({
           <Box m={"5px"}>
             <ButtonGroup
               size="small"
-              color="secondary"
+              color="neutral"
               variant="outlined"
             >
               <Button
