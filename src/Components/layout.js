@@ -69,18 +69,14 @@ const Layout = ({ children }) => {
   const [ textSize, setTextSize ] = React.useState(textSizeDefault);
   
   const handleTextSizeUp = () => {
-    console.log(typeof textSizeStorage)
     textSize < 30 ? setTextSize(textSize + 1) : setTextSize(16); 
-    console.log("text size", textSize);
   }
   const handleTextSizeDown = () => {
     textSize >= 12 ? setTextSize(textSize - 1) : setTextSize(textSize);
-    console.log("text size down", textSize);
   }
 
   React.useEffect(() => {
     window.localStorage.setItem("textSizeStorage", textSize);
-    // handleTextSizeUp();
   }, [ textSize ])
 
   return (
@@ -101,6 +97,9 @@ const Layout = ({ children }) => {
             padding: "180px 10px",
             maxWidth: { md: "600px" }, 
             'ol p': {
+              fontSize: `${textSize}px`,
+            },
+            'p': {
               fontSize: `${textSize}px`,
             }
           }} >

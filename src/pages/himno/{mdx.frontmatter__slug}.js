@@ -15,9 +15,6 @@ import {
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-
-
-
 const HimnoPage = ({ data, children }) => {
   const shortcodes = { Link };
   const location = useLocation();
@@ -25,10 +22,6 @@ const HimnoPage = ({ data, children }) => {
   const page = parseInt(defaultPage);
   // const textBig = "20px"
   const [ textSize, setTextSize ] = React.useState("1rem");
-
-
-
-
 
   return (
     <Layout >
@@ -46,8 +39,8 @@ const HimnoPage = ({ data, children }) => {
             'ol': {
               padding: '10px 0',
               paddingInlineStart: '30px',
-              fontSize: "20px",
-            }
+            },
+            
           }} >
 
           <MDXProvider components={shortcodes}>

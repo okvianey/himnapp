@@ -134,11 +134,11 @@ const ResponsiveAppBar = ({
             >
               <Button
                 disabled={textSize === 14 ? true : false}
-                onClick={handleTextSizeDown}><TextDecrease /></Button>
+                onClick={handleTextSizeDown}><TextDecrease sx={{ fontSize: "1rem" }} /></Button>
               <Button
                 disabled={textSize === 29 ? true : false}
                 onClick={handleTextSizeUp}
-              ><TextIncrease /></Button>
+              ><TextIncrease sx={{ fontSize: "1rem" }} /></Button>
             </ButtonGroup>
           </Box>
         </TextZoomBox>   
