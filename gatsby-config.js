@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `himnapp`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://github.com/vianydev/himnapp/`,
   },
+  pathPrefix: "/himnapp",
   plugins: [
     {
       resolve: `gatsby-plugin-manifest`,
@@ -35,7 +36,12 @@ module.exports = {
         path: `${__dirname}/himnos/`,
       }
     },
-    "gatsby-plugin-mdx",
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./relative/path/to/layout/component`),
+      },
+    },
   ],
   
 }
