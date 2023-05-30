@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vianydev.github.io">
-    <img alt="himnapp" src="/src/images/logo-white.svg" width="150" />
+    <img alt="himnapp" src="/src/images/logo-white.svg" width="160" />
   </a>
 </p>
 <h1 align="center">
