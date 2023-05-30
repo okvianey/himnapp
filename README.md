@@ -1,39 +1,51 @@
 <p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
+  <a href="https://vianydev.github.io">
+    <img alt="himnapp" src="/src/images/logo-white.svg" width="150" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby minimal starter
+ HIMNAPP
 </h1>
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+<!-- ## Example Site
+| [![](screenshots/homepage.png)](https://vianydev.github.io/himnappweb/) | [![](screenshots/features1.png)](https://vianydev.github.io/himnappweb) |
+|:---:|:---:|
+| **Homepage**  | **About**  | -->
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## Table of contents
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+- [Overview](#overview)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Pages](#pages)
+  - [Resources](#useful-resources)
+- [Author](#author)
 
-2.  **Start developing.**
+## Overview
 
-    Navigate into your new site’s directory and start it up.
+### Links
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+👉🏻 Code: [Code URL](https://github.com/vianydev/himnapp)
 
-3.  **Open the code and start customizing!**
+👉🏻 Live Site URL: [View Live Preview](https://vianydev.github.io/himnapp/)
 
-    Your site is now running at http://localhost:8000!
+## My process
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+### Pages
 
-4.  **Learn more**
+* **Homepage**
+* **About**
+* **Hymn page**
+
+<!-- resources -->
+### Resources
+
+Some third-party plugins that we used to build this template. Please check their license.
+
+* **Google Fonts**: <http://fonts.google.com/>
+
 
     - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
@@ -47,9 +59,9 @@
 
     - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
-## 🚀 Quick start (Gatsby Cloud)
+## Author
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
-#Himnapp
+☕️ Designed & Developed by [vianydev](https://vianydev.github.io)
+- Twitter - [@vianydev](https://www.twitter.com/vianydev)
+- Linkedin - [@vianydev](https://www.linkedin.com/in/vianydev/)
+- Github - [@vianydev](https://github.com/vianydev)
