@@ -36,12 +36,7 @@ module.exports = {
         path: `${__dirname}/himnos/`,
       }
     },
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(`./src/components/layout`),
-      },
-    },
+    `gatsby-plugin-layout`,
   ],
   
 }
