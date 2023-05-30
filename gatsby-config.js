@@ -39,7 +39,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-layout`,
       options: {
-        component: require.resolve(`./relative/path/to/layout/component`),
+        component: require.resolve(`../../components/layout`),
       },
     },
   ],
