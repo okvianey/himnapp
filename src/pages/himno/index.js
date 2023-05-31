@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Link, graphql } from "gatsby";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
-import SearchBar from "../components/searchBar";
+import * as React from 'react';
+import { Link, graphql } from 'gatsby';
+import Layout from '../../components/layout';
+import Seo from '../../components/seo';
+import SearchBar from "../../components/searchBar";
 import { styled } from "@mui/material/styles";
 import {
   Box,
@@ -11,7 +11,6 @@ import {
   ListItem,
   ListItemButton,
 } from "@mui/material";
-// import HymnsList from "../components/hymnsList";
 
 const StyledSearchBox = styled("div")(({ theme }) => ({
   padding: 20,
@@ -19,39 +18,36 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
-  [theme.breakpoints.down("sm")]: {
+  [ theme.breakpoints.down("sm") ]: {
     flexDirection: "column",
     alignItems: "flex-start",
   },
 }));
 
-// Page
-const IndexPage = ({ data }) => {
+const HimnarioPage = ({ data }) => {
   const himnarioCompleto = data.allMdx.nodes;
   const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
-  const [ input, setInput ] = React.useState("");
+
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    setInput(e.target.value);
-    let inputToUpper = input.toUpperCase();
-    let himnosFiltrados = himnarioCompleto.filter((himno) =>
-      himno.frontmatter.title.includes(inputToUpper)
-    );
-    setHimnario(himnosFiltrados.length >= 1 ? himnosFiltrados : []);
+    // e.preventDefault();
+    // let checkWord = "" + e.target.value.toUpperCase();
+    // let himnosFiltrados = himnarioCompleto.filter((himno) =>
+    //   himno.frontmatter.title.includes(checkWord)
+    // );
+    // setHimnario(himnosFiltrados);
   };
 
   return (
-  <Layout>
-    <Box className="hymns-list-with-favorites">
-      {/*Search Bar  */}
-      <StyledSearchBox>
-        <Typography variant="h1" mb={2}> Buscar himno: </Typography>
-        <SearchBar handleSearch={handleSearch} />
+    <Layout pageTitle="My Blog Posts">
+      <Box className="hymns-list-with-favorites">
+        {/*Search Bar  */}
+        <StyledSearchBox>
+          <Typography variant="h1" mb={2}> Buscar himno: </Typography>
+          <SearchBar handleSearch={handleSearch} />
         </StyledSearchBox>
-        
-        
-      <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+
+        <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
         {himnario.map((node) => {
           const keyId = node.id;
 
@@ -73,10 +69,10 @@ const IndexPage = ({ data }) => {
         })}
       </List>
 
-    </Box>
-  </Layout>
-  );
-};
+      </Box>
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query {
@@ -92,5 +88,6 @@ export const query = graphql`
   }
 }`
 
-export const Head = () => <Seo title="Himnario" />;
-export default IndexPage;
+export const Head = () => <Seo title="Lista de himnos" />
+
+export default HimnarioPage

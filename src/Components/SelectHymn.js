@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
-
+import { useLocation } from "@reach/router";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {
@@ -18,18 +18,16 @@ import {
 const SimpleDialog = ({ onClose, open, hymnNumber }) => {
   const data = useStaticQuery(graphql`
     query {
-      allMdx(sort: {fields: frontmatter___order, order: ASC}) {
-        nodes {
-          id
-          frontmatter {
-            title
-            slug
-            order
-          }
-        }
+  allMdx(sort: {frontmatter: {order: ASC}}) {
+    nodes {
+      frontmatter {
+        title
+        slug
+        order
       }
+      id
     }
-  `);
+  }}`);
   
   return (
     <Dialog onClick={() => onClose()} open={open} fullWidth>
@@ -45,23 +43,21 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
         >
           {
             data.allMdx.nodes.map((node) => {
-            const index = '/himno/' + node.frontmatter.slug; //Hymn Number selected
+            const index = '/himno/' + node.frontmatter.slug; 
             
               if (index === "/himno/0") {
               return (
                 <MenuItem
                   key={node.id}
-                  // selected={index.includes(hymnNumber)}
                   disableGutters
-                  // dense
                   sx={{
                     textAlign: "center",
                     justifyContent: "center",
                     border: "1px solid gray",
                     borderRadius: "5px",
                   }}
-                  component={Link}
-                  to={"/"}
+                  // component={Link}
+                  // to={"/"}
                 >
                   <SearchIcon color="disabled" />
                 </MenuItem>
@@ -70,9 +66,7 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
               return (
                 <MenuItem
                   key={node.id}
-                  selected={index === hymnNumber}
                   disableGutters
-                  // dense
                   sx={{
                     textAlign: "center",
                     justifyContent: "center",
@@ -81,7 +75,7 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
                   }}
                   component={Link}
                   to={`/himno/${node.frontmatter.slug}`}
-                  
+                  activeStyle={{ backgroundColor: "#CC3945"}}
                 >
                   {node.frontmatter.slug}
                 </MenuItem>
@@ -95,7 +89,12 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
 }
 
 function SelectHymn() {
-  const hymnNumber = window.location.pathname;
+  const location = useLocation();
+  const path = location.pathname;
+  const pathArr = path.split("/");
+  const hymnNumber = pathArr.filter(item => item !== "himno" && item !== "").join();
+
+
   const [open, setOpen] = React.useState(false);
 
   const handleToggle = () => {
@@ -117,16 +116,11 @@ function SelectHymn() {
           }}
           onClick={handleToggle}
         >
-          { hymnNumber[ hymnNumber.length - 2 ] === '/' ? 
-          "Himno " + hymnNumber.slice([ hymnNumber.length - 1 ]) : 
-          hymnNumber[ hymnNumber.length - 3 ] === '/' ? 
-          "Himno " + hymnNumber.slice([ hymnNumber.length - 2 ]) :
-          "Buscar himno" }
+          {"Himno "+  hymnNumber }
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
       <SimpleDialog
-        hymnNumber={hymnNumber}
         open={open}
         onClose={handleClosed}
       />

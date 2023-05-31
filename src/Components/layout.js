@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useStaticQuery, graphql } from 'gatsby'
+
 import { useLocation } from "@reach/router";
 import { ColorModeContext } from "./context";
 import ResponsiveAppBar from "./responsiveAppBar";
@@ -6,7 +8,17 @@ import FixedBottomNavigation from "./fixedBottomNavigation";
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-const Layout = ({ children }) => {
+const Layout = ({ pageTitle, children }) => {
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     site {
+  //       siteMetadata {
+  //         title
+  //       }
+  //     }
+  //   }
+  // `)
+
   const location = useLocation();
 
   // Dark Mode
@@ -97,10 +109,9 @@ const Layout = ({ children }) => {
           handleTextSizeDown={handleTextSizeDown}
           textSize={textSize}
         />
-
         <Container
           sx={{
-            padding: "180px 10px",
+            padding: "100px 10px",
             maxWidth: { md: "600px" }, 
             'ol p': {
               fontSize: `${textSize}px`,

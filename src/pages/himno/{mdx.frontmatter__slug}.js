@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql, Link } from 'gatsby'
 import { useLocation } from "@reach/router";
-import { MDXProvider } from "@mdx-js/react";
+// import { MDXProvider } from "@mdx-js/react";
 import Layout from '../../components/layout';
 import Seo from '../../components/seo';
 
@@ -16,7 +16,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const HimnoPage = ({ data, children }) => {
-  const shortcodes = { Link };
+
+  // const shortcodes = { Link };
   const location = useLocation();
   const defaultPage = location.pathname.slice(7);
   const page = parseInt(defaultPage);
@@ -41,9 +42,9 @@ const HimnoPage = ({ data, children }) => {
             
           }} >
 
-          <MDXProvider components={shortcodes}>
+          {/* <MDXProvider components={shortcodes}> */}
             {children}
-          </MDXProvider>
+          {/* </MDXProvider> */}
 
           {/* back page button */}
           <IconButton
@@ -84,17 +85,16 @@ const HimnoPage = ({ data, children }) => {
 };
 
 export const query = graphql`
-  query ($id: String!) {
-    mdx(id: {eq: $id}) {
-      frontmatter {
-        title
-        slug
-      }
+query ($id: String = "id") {
+  mdx(id: {eq: $id}) {
+    frontmatter {
+      order
+      slug
+      title
     }
   }
+}
 `
-
-
 
 export const Head = ({ data }) => <Seo title={data.mdx.frontmatter.title} />
 export default HimnoPage;

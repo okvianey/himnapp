@@ -1,11 +1,14 @@
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions;
-
-  const typeDefs = `
-    type Query {
-      allMdx: [Mdx] # Define the 'allMdx' field as an array of 'Mdx' type
-    }
-  `;
-
-  createTypes(typeDefs);
-};
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html" || stage === "develop-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /bad-module/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+}

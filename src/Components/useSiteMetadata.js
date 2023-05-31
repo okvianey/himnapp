@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import * as React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 
-const useSiteMetadata = ({ title }) => {
+const useSiteMetadata = () => {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -15,4 +15,4 @@ const useSiteMetadata = ({ title }) => {
   return data.site.siteMetadata
 }
 
-export default useSiteMetadata;
+export default useSiteMetadata
