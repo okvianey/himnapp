@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { graphql, Link } from 'gatsby'
 import { useLocation } from "@reach/router";
-// import { MDXProvider } from "@mdx-js/react";
 import Layout from '../../components/layout';
 import Seo from '../../components/seo';
 
@@ -17,10 +16,11 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const HimnoPage = ({ data, children }) => {
 
-  // const shortcodes = { Link };
   const location = useLocation();
-  const defaultPage = location.pathname.slice(7);
-  const page = parseInt(defaultPage);
+  
+  const pathURL = location.pathname.split("/");
+  const hymnNumber = pathURL.filter(item => item !== "himno" && item !== "" && item !== "himnapp").join();
+  const page = parseInt(hymnNumber);
 
   return (
     <Layout >
@@ -42,9 +42,7 @@ const HimnoPage = ({ data, children }) => {
             
           }} >
 
-          {/* <MDXProvider components={shortcodes}> */}
             {children}
-          {/* </MDXProvider> */}
 
           {/* back page button */}
           <IconButton

@@ -31,15 +31,24 @@ const IndexPage = ({ data }) => {
   const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
   const [ input, setInput ] = React.useState("");
 
-  const handleSearch = (e) => {
+  const handleInput = (e) => {
     e.preventDefault();
     setInput(e.target.value);
-    let inputToUpper = input.toUpperCase();
-    let himnosFiltrados = himnarioCompleto.filter((himno) =>
-      himno.frontmatter.title.includes(inputToUpper)
-    );
-    setHimnario(himnosFiltrados.length >= 1 ? himnosFiltrados : []);
-  };
+  }
+
+
+
+  React.useEffect(() => {
+    const handleSearch = () => {
+      let inputToUpper = input.toUpperCase();
+      let himnosFiltrados = himnarioCompleto.filter((himno) =>
+        himno.frontmatter.title.includes(inputToUpper)
+      );
+      setHimnario(himnosFiltrados.length >= 1 ? himnosFiltrados : []);
+    };
+
+    handleSearch();
+  }, [input])
 
   return (
   <Layout>
@@ -47,7 +56,7 @@ const IndexPage = ({ data }) => {
       {/*Search Bar  */}
       <StyledSearchBox>
         <Typography variant="h1" mb={2}> Buscar himno: </Typography>
-        <SearchBar handleSearch={handleSearch} />
+          <SearchBar handleSearch={handleInput} />
         </StyledSearchBox>
         
         

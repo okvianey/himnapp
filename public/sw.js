@@ -27,21 +27,21 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-4d687377e64ae7431e27.js"
+    "url": "webpack-runtime-c248bd7a1cb480e8b3f0.js"
   },
   {
     "url": "framework-c59c2422ebbc3d177bed.js"
   },
   {
-    "url": "app-6407ab701c5c701b49ed.js"
+    "url": "app-b628a4ac0f0d8f9d594d.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "2ca7655e2277de95aeba5dc5460155ac"
+    "revision": "84c6f00b16e5f60a6c897539ff148f0a"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "d464e16e6380dfc4dfc77c8ff8eb275f"
+    "revision": "a3dfeb4049755f0bab082e6eb834858b"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -146,12 +146,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/himnapp`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-6407ab701c5c701b49ed.js`))) {
+  if (!resources || !(await caches.match(`/himnapp/app-b628a4ac0f0d8f9d594d.js`))) {
     return await fetch(event.request)
   }
 
@@ -164,7 +164,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/himnapp/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
