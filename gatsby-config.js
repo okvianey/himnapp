@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `himnapp`,
     siteUrl: `https://github.com/vianydev/himnapp/`,
-    layoutComponent: require.resolve("./src/components/layout.js"),
+    // layoutComponent: require.resolve("./src/components/layout.js"),
   },
   pathPrefix: "/himnapp",
   plugins: [

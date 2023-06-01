@@ -25,7 +25,7 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
 }));
 
 const HimnarioPage = ({ data }) => {
-  const himnarioCompleto = data.allMdx.nodes;
+  // const himnarioCompleto = data.allMdx.nodes;
   const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
 
 

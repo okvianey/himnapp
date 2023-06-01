@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useStaticQuery, graphql } from 'gatsby'
 
 import { useLocation } from "@reach/router";
 import { ColorModeContext } from "./context";
@@ -8,30 +7,27 @@ import FixedBottomNavigation from "./fixedBottomNavigation";
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-const Layout = ({ pageTitle, children }) => {
-  // const data = useStaticQuery(graphql`
-  //   query {
-  //     site {
-  //       siteMetadata {
-  //         title
-  //       }
-  //     }
-  //   }
-  // `)
+const Layout = ({ children }) => {
 
   const location = useLocation();
+  const isBrowser = typeof window !== "undefined";
 
   // Dark Mode
-  const colorStorage = window.localStorage.getItem("color-mode");
-  const systemColor = window.matchMedia("(prefers-color-scheme: dark)");
-  const defaultTheme = !systemColor.matches || colorStorage === "light" || colorStorage === undefined ?
-    "light" : "dark";
+  let defaultTheme = "dark";
+  
+  if (isBrowser) {
+    const colorStorage = localStorage.getItem("color-mode");
+    const systemColor = window.matchMedia("(prefers-color-scheme: dark)");
+    defaultTheme = !systemColor.matches || colorStorage === "light" || colorStorage === undefined ? "light" : "dark";
+  }
 
-  const [mode, setMode] = React.useState(defaultTheme);
+  const [ mode, setMode ] = React.useState(defaultTheme);
+
+
+
 
   const colorMode = React.useMemo(
     () => ({
-      // The dark mode switch would invoke this method
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
@@ -80,8 +76,12 @@ const Layout = ({ pageTitle, children }) => {
     [mode]
   );
 
+
   // Text Size
-  const textStorage = window.localStorage.getItem("textSizeStorage");
+  let textStorage;
+  if (isBrowser) {
+    textStorage = localStorage.getItem("textSizeStorage");
+  }
   const textSizeStorage = parseInt(textStorage);
   const textSizeDefault = textSizeStorage !== 16 ? textSizeStorage : 16;
   const [ textSize, setTextSize ] = React.useState(textSizeDefault);
@@ -99,16 +99,15 @@ const Layout = ({ pageTitle, children }) => {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}> 
-
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <ResponsiveAppBar 
           mode={mode} 
-          location={location}
           handleTextSizeUp={handleTextSizeUp}
           handleTextSizeDown={handleTextSizeDown}
           textSize={textSize}
         />
+
         <Container
           sx={{
             padding: "100px 10px",
@@ -120,9 +119,13 @@ const Layout = ({ pageTitle, children }) => {
               fontSize: `${textSize}px`,
             }
           }} >
+
           {children}
+
+          {theme.palette.mode === 'dark' ? <h1>dark</h1> : <h1>light</h1>}
         </Container>
-        <FixedBottomNavigation location={location} />
+
+          <FixedBottomNavigation />
 
       </ThemeProvider>
     </ColorModeContext.Provider>

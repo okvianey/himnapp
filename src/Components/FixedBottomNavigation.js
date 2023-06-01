@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Link } from "gatsby";
+import { useLocation } from "@reach/router";
 import {
+  CssBaseline,
   Box,
+  Container,
   Paper,
   BottomNavigation,
   BottomNavigationAction,
@@ -11,8 +14,8 @@ import InfoIcon from '@mui/icons-material/Info';
 // import FavoriteIcon from "@mui/icons-material/Favorite";
 // import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
-function FixedBottomNavigation({ location }) {
-
+function FixedBottomNavigation() {
+  const location = useLocation();
   const currentPage = location.pathname;
   const defaultValue = currentPage !== "/" ? 1 : 0
   // const defaultValue = 0;
@@ -27,8 +30,8 @@ function FixedBottomNavigation({ location }) {
   // }, [ location, currentPage ]);
 
   return (
-    <Box>
-      <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Container >
+      <Paper sx={{ position: "fixed", bottom: 0, left: 0, right: 0, }} elevation={3}>
       
         <BottomNavigation
           showLabels
@@ -43,21 +46,17 @@ function FixedBottomNavigation({ location }) {
             component={Link}
             to="/"
           />
-
-          {!currentPage.includes("/himno") ? 
-            <BottomNavigationAction
-              label="Info"
-              icon={<InfoIcon />}
-              component={Link}
-              to="/about"
-            /> :
-            <br />
-          }
+          <BottomNavigationAction
+            label="Info"
+            icon={<InfoIcon />}
+            component={Link}
+            to="/about"
+          />
 
         </BottomNavigation> 
           
       </Paper>
-    </Box>
+    </Container>
   );
 }
 

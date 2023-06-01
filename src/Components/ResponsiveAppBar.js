@@ -1,5 +1,9 @@
 import * as React from "react";
+// import { useContext } from 'react';
+// import { ThemeContext } from '../context/ThemeProvider';
+
 import { Link } from "gatsby";
+import { useLocation } from "@reach/router";
 import {
   AppBar,
   Box,
@@ -33,12 +37,11 @@ const TextZoomBox = styled('div')(({ theme }) => ({
 
 const ResponsiveAppBar = ({
   mode,
-  location,
   handleTextSizeUp,
   handleTextSizeDown,
   textSize,
 }) => {
-  
+  const location = useLocation();
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   // const handleOpenUserMenu = (event) => {
@@ -48,7 +51,7 @@ const ResponsiveAppBar = ({
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  // const { theme, toggleTheme } = useContext(ThemeContext);
 
 
   return (

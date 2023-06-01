@@ -5,9 +5,3 @@ export const ColorModeContext = React.createContext({
   colorDefault: () => { }
 });
 
-
-
-export const LoggedContext = React.createContext({
-  toggleLogged: () => { },
-  log: false,
-})

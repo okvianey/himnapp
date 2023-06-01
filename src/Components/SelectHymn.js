@@ -90,9 +90,8 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
 
 function SelectHymn() {
   const location = useLocation();
-  const path = location.pathname;
-  const pathArr = path.split("/");
-  const hymnNumber = pathArr.filter(item => item !== "himno" && item !== "").join();
+  const pathURL = location.pathname.split("/");
+  const hymnNumber = pathURL.filter(item => item !== "himno" && item !== "").join();
 
 
   const [open, setOpen] = React.useState(false);
@@ -116,7 +115,7 @@ function SelectHymn() {
           }}
           onClick={handleToggle}
         >
-          {"Himno "+  hymnNumber }
+          {pathURL.includes("himno") ? "Himno "+  hymnNumber : "Buscar himno" }
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
