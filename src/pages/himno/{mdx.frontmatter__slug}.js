@@ -53,7 +53,7 @@ const HimnoPage = ({ data, children }) => {
               position: "fixed",
               bottom: "12px",
               left: "20px",
-              zIndex: "100",
+              zIndex: "800",
             }}
             component={Link}
             to={`/himno/${page - 1}`}
@@ -68,7 +68,7 @@ const HimnoPage = ({ data, children }) => {
               position: "fixed",
               bottom: "12px",
               right: "20px",
-              zIndex: "100",
+              zIndex: "800",
             }}
             component={Link}
             to={`/himno/${page + 1}`}

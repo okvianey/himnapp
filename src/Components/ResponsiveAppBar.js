@@ -37,6 +37,7 @@ const TextZoomBox = styled('div')(({ theme }) => ({
 
 const ResponsiveAppBar = ({
   mode,
+  check,
   handleTextSizeUp,
   handleTextSizeDown,
   textSize,
@@ -51,7 +52,6 @@ const ResponsiveAppBar = ({
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  // const { theme, toggleTheme } = useContext(ThemeContext);
 
 
   return (
@@ -131,7 +131,7 @@ const ResponsiveAppBar = ({
           <SelectHymn />
           <Box m={"5px"}>
             <ButtonGroup
-              size="small"
+              size="medium"
               color="neutral"
               variant="outlined"
             >

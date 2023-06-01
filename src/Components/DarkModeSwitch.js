@@ -47,7 +47,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-track': {
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+    backgroundColor: theme.palette.mode === 'dark' ? '#aab4be' : '#8796A5',
+    // backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
     borderRadius: 20 / 2,
   },
 }));
@@ -56,13 +57,12 @@ export default function DarkModeSwitch({ mode }) {
 
   const colorMode = React.useContext(ColorModeContext);
 
-  const [check, setCheck] = React.useState(true);
+  const [ check, setCheck ] = React.useState(mode === 'dark' ? true : false);
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     const toggleDefaultChecked = () => {
       mode === 'dark' ? setCheck(true) : setCheck(false);
     }
-    
     toggleDefaultChecked();
   }, [mode])
 

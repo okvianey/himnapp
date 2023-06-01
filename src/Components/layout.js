@@ -1,29 +1,27 @@
 import * as React from "react";
 
-import { useLocation } from "@reach/router";
 import { ColorModeContext } from "./context";
-import ResponsiveAppBar from "./responsiveAppBar";
-import FixedBottomNavigation from "./fixedBottomNavigation";
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ResponsiveAppBar from "./responsiveAppBar";
+import FixedBottomNavigation from "./fixedBottomNavigation";
 
 const Layout = ({ children }) => {
-
-  const location = useLocation();
   const isBrowser = typeof window !== "undefined";
 
   // Dark Mode
-  let defaultTheme = "dark";
+  let defaultTheme;
   
   if (isBrowser) {
     const colorStorage = localStorage.getItem("color-mode");
     const systemColor = window.matchMedia("(prefers-color-scheme: dark)");
-    defaultTheme = !systemColor.matches || colorStorage === "light" || colorStorage === undefined ? "light" : "dark";
+    defaultTheme =
+      !systemColor.matches || colorStorage === "light" || colorStorage === undefined
+        ? "light"
+        : "dark";
   }
 
   const [ mode, setMode ] = React.useState(defaultTheme);
-
-
 
 
   const colorMode = React.useMemo(
@@ -36,8 +34,9 @@ const Layout = ({ children }) => {
   );
 
   React.useEffect(() => {
-    window.localStorage.setItem("color-mode", mode);
-  }, [mode]);
+    localStorage.setItem("color-mode", mode);
+  }, [ mode ]);
+  
 
   const theme = React.useMemo(
     () =>
@@ -107,6 +106,7 @@ const Layout = ({ children }) => {
           handleTextSizeDown={handleTextSizeDown}
           textSize={textSize}
         />
+        <FixedBottomNavigation />
 
         <Container
           sx={{
@@ -119,13 +119,10 @@ const Layout = ({ children }) => {
               fontSize: `${textSize}px`,
             }
           }} >
-
           {children}
-
-          {theme.palette.mode === 'dark' ? <h1>dark</h1> : <h1>light</h1>}
         </Container>
 
-          <FixedBottomNavigation />
+        
 
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -91,7 +91,7 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
 function SelectHymn() {
   const location = useLocation();
   const pathURL = location.pathname.split("/");
-  const hymnNumber = pathURL.filter(item => item !== "himno" && item !== "").join();
+  const hymnNumber = pathURL.filter(item => item !== "himno" && item !== "" && item !== "himnapp").join();
 
 
   const [open, setOpen] = React.useState(false);
