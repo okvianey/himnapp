@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `himnapp`,
+    description: `Himnapp - Himnario Bautista`,
     siteUrl: `https://vianydev.github.io/himnapp/`,
-    // layoutComponent: require.resolve("./src/components/layout.js"),
   },
   pathPrefix: "/himnapp",
   plugins: [

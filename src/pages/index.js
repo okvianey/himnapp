@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, graphql } from "gatsby";
+import { Link } from "gatsby";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import SearchBar from "../components/searchBar";
@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemButton,
 } from "@mui/material";
-// import HymnsList from "../components/hymnsList";
+import hymnsList from "../assets/hymnsList.json";
 
 const StyledSearchBox = styled("div")(({ theme }) => ({
   padding: 20,
@@ -25,10 +25,10 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
   },
 }));
 
-// Page
-const IndexPage = ({ data }) => {
-  const himnarioCompleto = data.allMdx.nodes;
-  const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
+const IndexPage = () => {
+
+  const himnarioCompleto = hymnsList;
+  const [ himnario, setHimnario ] = React.useState([]);
   const [ input, setInput ] = React.useState("");
 
   const handleInput = (e) => {
@@ -36,70 +36,62 @@ const IndexPage = ({ data }) => {
     setInput(e.target.value);
   }
 
-
+  // Console to check himnos
+  // console.log("data", data);
 
   React.useEffect(() => {
     const handleSearch = () => {
       let inputToUpper = input.toUpperCase();
-      let himnosFiltrados = himnarioCompleto.filter((himno) =>
-        himno.frontmatter.title.includes(inputToUpper)
-      );
-      setHimnario(himnosFiltrados.length >= 1 ? himnosFiltrados : []);
+      
+      if (inputToUpper.length > 0) {
+        let himnosFiltrados =
+        himnarioCompleto.filter((himno) =>
+          himno.frontmatter.title.includes(inputToUpper)
+          );
+        setHimnario(himnosFiltrados);
+      } else {
+        setHimnario(hymnsList);
+      }
     };
 
     handleSearch();
-  }, [input])
+  }, [ input, himnarioCompleto ])
 
   return (
   <Layout>
-    <Box className="hymns-list-with-favorites">
-      {/*Search Bar  */}
+    <Box>
       <StyledSearchBox>
         <Typography variant="h1" mb={2}> Buscar himno: </Typography>
-          <SearchBar handleSearch={handleInput} />
-        </StyledSearchBox>
-        
+        <SearchBar handleSearch={handleInput} />
+      </StyledSearchBox>
         
       <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
-        {himnario.map((node) => {
-          const keyId = node.id;
+        {
+          himnario.length > 0 ?
+            
+            himnario.map((node) => {
+              const keyId = node.id;
 
-          if (node.frontmatter.slug === "0") {
-            return <ListItem key={keyId}></ListItem>;
-          } else {
-            return (
-              <ListItem key={keyId} disablePadding divider>
-                <ListItemButton
-                  color="inherit"
-                  component={Link}
-                  to={`/himno/${node.frontmatter.slug}`}
-                >
-                  {node.frontmatter.title}
-                </ListItemButton>
-              </ListItem>
-            );
+              return (
+                <ListItem key={keyId} disablePadding divider>
+                  <ListItemButton
+                    color="inherit"
+                    component={Link}
+                    to={`/himno/${node.frontmatter.slug}`}
+                  >
+                    {node.frontmatter.title}
+                  </ListItemButton>
+                </ListItem>
+              );
+            }) :
+            <p></p>
           }
-        })}
       </List>
 
     </Box>
   </Layout>
   );
 };
-
-export const query = graphql`
-  query {
-  allMdx(sort: {frontmatter: {order: ASC}}) {
-    nodes {
-      frontmatter {
-        title
-        slug
-        order
-      }
-      id
-    }
-  }
-}`
 
 export const Head = () => <Seo title="Himnario" />;
 export default IndexPage;

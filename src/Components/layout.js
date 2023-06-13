@@ -1,10 +1,9 @@
 import * as React from "react";
-
 import { ColorModeContext } from "./context";
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import ResponsiveAppBar from "./responsiveAppBar";
-import FixedBottomNavigation from "./fixedBottomNavigation";
+import NavbarTop from "./NavbarTop";
+import BottomBar from "./BottomBar";
 
 const Layout = ({ children }) => {
   const isBrowser = typeof window !== "undefined";
@@ -22,7 +21,6 @@ const Layout = ({ children }) => {
   }
 
   const [ mode, setMode ] = React.useState(defaultTheme);
-
 
   const colorMode = React.useMemo(
     () => ({
@@ -75,7 +73,6 @@ const Layout = ({ children }) => {
     [mode]
   );
 
-
   // Text Size
   let textStorage;
   if (isBrowser) {
@@ -100,17 +97,17 @@ const Layout = ({ children }) => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <ResponsiveAppBar 
+        <NavbarTop 
           mode={mode} 
           handleTextSizeUp={handleTextSizeUp}
           handleTextSizeDown={handleTextSizeDown}
           textSize={textSize}
         />
-        <FixedBottomNavigation />
+        <BottomBar />
 
         <Container
           sx={{
-            padding: "100px 10px",
+            padding: "100px 5px",
             maxWidth: { md: "600px" }, 
             'ol p': {
               fontSize: `${textSize}px`,

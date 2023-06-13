@@ -25,26 +25,41 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
 }));
 
 const HimnarioPage = ({ data }) => {
-  // const himnarioCompleto = data.allMdx.nodes;
-  const [himnario, setHimnario] = React.useState(data.allMdx.nodes);
 
+  const himnarioDefault = data.allMdx.nodes;
+  const himnarioCompleto = himnarioDefault;
+  const [ himnario, setHimnario ] = React.useState(himnarioDefault);
+  const [ input, setInput ] = React.useState("");
 
-  const handleSearch = (e) => {
-    // e.preventDefault();
-    // let checkWord = "" + e.target.value.toUpperCase();
-    // let himnosFiltrados = himnarioCompleto.filter((himno) =>
-    //   himno.frontmatter.title.includes(checkWord)
-    // );
-    // setHimnario(himnosFiltrados);
-  };
+  const handleInput = (e) => {
+    e.preventDefault();
+    setInput(e.target.value);
+  }
+
+  React.useEffect(() => {
+    const handleSearch = () => {
+      let inputToUpper = input.toUpperCase();
+
+      if (inputToUpper.length > 0) {
+        let himnosFiltrados =
+          himnarioCompleto.filter((himno) =>
+            himno.frontmatter.title.includes(inputToUpper)
+          );
+        setHimnario(himnosFiltrados);
+      } else {
+        setHimnario(himnarioDefault);
+      }
+    };
+
+    handleSearch();
+  }, [ input, himnarioCompleto, himnarioDefault ])
 
   return (
-    <Layout pageTitle="My Blog Posts">
-      <Box className="hymns-list-with-favorites">
-        {/*Search Bar  */}
+    <Layout sx={{ padding: "0 !important" }}>
+      <Box>
         <StyledSearchBox>
           <Typography variant="h1" mb={2}> Buscar himno: </Typography>
-          <SearchBar handleSearch={handleSearch} />
+          <SearchBar handleSearch={handleInput} />
         </StyledSearchBox>
 
         <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>

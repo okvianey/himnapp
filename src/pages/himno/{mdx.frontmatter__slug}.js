@@ -8,7 +8,7 @@ import {
   Box,
   Typography,
   Paper,
-  IconButton,
+  Fab,
 } from "@mui/material";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -17,14 +17,14 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 const HimnoPage = ({ data, children }) => {
 
   const location = useLocation();
-  
-  const pathURL = location.pathname.split("/");
-  const hymnNumber = pathURL.filter(item => item !== "himno" && item !== "" && item !== "himnapp").join();
+  const hasNumber = /\d+/;
+  const hymnNumber = location.pathname.match(hasNumber);
   const page = parseInt(hymnNumber);
+  
 
   return (
     <Layout >
-      <Paper sx={{ padding: "10px 10px", }}>        
+      <Paper sx={{ padding: "10px 10px" }}>        
 
         <Typography variant="h1" align="center" gutterBottom>
           {data.mdx.frontmatter.title}
@@ -32,49 +32,63 @@ const HimnoPage = ({ data, children }) => {
 
         <Box align="center" 
           sx={{ 
+            padding: "0 2px",
             margin: "0 auto", 
             maxWidth: "400px", 
             textAlign: "center", 
             'ol': {
-              padding: '10px 0',
-              paddingInlineStart: '30px',
+              padding: '5px 0',
+              paddingInlineStart: '10px',
             },
             
           }} >
 
             {children}
 
-          {/* back page button */}
-          <IconButton
-            disabled={page === 1 ? true : false }
+          <Box
             sx={{
+              display: "flex",
+              justifyContent: "space-between",
               position: "fixed",
-              bottom: "12px",
-              left: "20px",
+              bottom: "95px",
+              left: "0",
               zIndex: "800",
-            }}
-            component={Link}
-            to={`/himno/${page - 1}`}
-          >
-            <ArrowBackIosIcon />
-          </IconButton>
+              width: "100%"
+          }}>
+            <Fab
+              size='small'
+              disabled={page === 1 ? true : false}
+              component={Link}
+              to={`/himno/${page - 1}`}
+              sx={{
+                opacity: "0.3",
+                transition: 'background-color 0.3s ease',
+                '&:hover': {
+                  opacity: '1',
+                }
+              }}
+            >
+              <ArrowBackIosIcon />
+            </Fab>
 
-          {/* next page button */}
-          <IconButton
-            disabled={page === 49 ? true : false}
-            sx={{
-              position: "fixed",
-              bottom: "12px",
-              right: "20px",
-              zIndex: "800",
-            }}
-            component={Link}
-            to={`/himno/${page + 1}`}
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
+            <Fab
+              size='small'
+              disabled={page >= 99 ? true : false}
+              component={Link}
+              to={`/himno/${page + 1}`}
+              sx={{
+                opacity: "0.3",
+                transition: 'background-color 0.3s ease',
+                '&:hover': {
+                  opacity: '1',
+                }
+              }}
+            >
+              <ArrowForwardIosIcon sx={{ fonsSize: "5px"}} />
+            </Fab>
+          </Box>
+
         </Box>
-
 
       </Paper>
 

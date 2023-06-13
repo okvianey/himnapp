@@ -14,8 +14,7 @@ import {
   DialogContent
 } from "@mui/material";
 
-
-const SimpleDialog = ({ onClose, open, hymnNumber }) => {
+const SimpleDialog = ({ onClose, open }) => {
   const data = useStaticQuery(graphql`
     query {
   allMdx(sort: {frontmatter: {order: ASC}}) {
@@ -56,8 +55,6 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
                     border: "1px solid gray",
                     borderRadius: "5px",
                   }}
-                  // component={Link}
-                  // to={"/"}
                 >
                   <SearchIcon color="disabled" />
                 </MenuItem>
@@ -90,9 +87,8 @@ const SimpleDialog = ({ onClose, open, hymnNumber }) => {
 
 function SelectHymn() {
   const location = useLocation();
-  const pathURL = location.pathname.split("/");
-  const hymnNumber = pathURL.filter(item => item !== "himno" && item !== "" && item !== "himnapp").join();
-
+  const hasNumberRegex = /\d+/;
+  const hasHymnNumber = location.pathname.match(hasNumberRegex);
 
   const [open, setOpen] = React.useState(false);
 
@@ -105,7 +101,7 @@ function SelectHymn() {
   };
 
   return (
-    <Box>
+    <Box m={1}>
       <ButtonGroup color="neutral" variant="outlined" size="small">
         <Button
           size="small"
@@ -115,7 +111,7 @@ function SelectHymn() {
           }}
           onClick={handleToggle}
         >
-          {pathURL.includes("himno") ? "Himno "+  hymnNumber : "Buscar himno" }
+          {hasHymnNumber ? "Himno " + hasHymnNumber[ 0 ] : "Buscar himno" }
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
