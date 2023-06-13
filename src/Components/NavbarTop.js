@@ -40,12 +40,8 @@ const NavbarTop = ({
 }) => {
   const location = useLocation();
   const currentPage = location.pathname;
-  const hasNumber = /\d+/;
+  // const hasNumber = /\d+/;
 
-  const value =
-    currentPage.includes("about") ? 3 :
-      hasNumber.test(currentPage) ? 2 :
-        currentPage.includes("himno") && !hasNumber.test(currentPage) ? 1 : 0
 
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
@@ -129,7 +125,7 @@ const NavbarTop = ({
       <Divider />
 
     
-      {currentPage.includes("himno") && !hasNumber.test(currentPage) ?
+      {currentPage.includes("about") ?
         <br /> :
         <TextZoomBox>
           <SelectHymn /> 
@@ -140,10 +136,10 @@ const NavbarTop = ({
               variant="outlined"
             >
               <Button
-                disabled={textSize === 14 ? true : false}
+                disabled={textSize < 12 ? true : false}
                 onClick={handleTextSizeDown}><TextDecrease sx={{ fontSize: "1rem" }} /></Button>
               <Button
-                disabled={textSize === 29 ? true : false}
+                disabled={textSize > 29 ? true : false}
                 onClick={handleTextSizeUp}
               ><TextIncrease sx={{ fontSize: "1rem" }} /></Button>
             </ButtonGroup>

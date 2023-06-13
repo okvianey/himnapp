@@ -53,7 +53,8 @@ const HimnoPage = ({ data, children }) => {
               bottom: "95px",
               left: "0",
               zIndex: "800",
-              width: "100%"
+              width: "100%",
+              padding: "0 5px"
           }}>
             <Fab
               size='small'
@@ -73,7 +74,7 @@ const HimnoPage = ({ data, children }) => {
 
             <Fab
               size='small'
-              disabled={page >= 99 ? true : false}
+              disabled={page >= 199 ? true : false}
               component={Link}
               to={`/himno/${page + 1}`}
               sx={{

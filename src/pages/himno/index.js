@@ -31,6 +31,9 @@ const HimnarioPage = ({ data }) => {
   const [ himnario, setHimnario ] = React.useState(himnarioDefault);
   const [ input, setInput ] = React.useState("");
 
+  // Console to check himnos
+  // console.log("data", data);
+
   const handleInput = (e) => {
     e.preventDefault();
     setInput(e.target.value);

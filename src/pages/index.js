@@ -36,8 +36,7 @@ const IndexPage = () => {
     setInput(e.target.value);
   }
 
-  // Console to check himnos
-  // console.log("data", data);
+  
 
   React.useEffect(() => {
     const handleSearch = () => {
