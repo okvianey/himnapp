@@ -119,8 +119,6 @@ const Layout = ({ children }) => {
           {children}
         </Container>
 
-        
-
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

@@ -1,1 +1,0 @@
-favoritesId = [ "72a2b6df-4b99-573b-af49-1ed4099db41d", "d7a9ea06-84fd-556c-8b07-74f7a0417d1b", "89109e0a-cb22-56d6-a2be-cb7283521c6d" ]

@@ -41,6 +41,7 @@ const NavbarTop = ({
   const location = useLocation();
   const currentPage = location.pathname;
   // const hasNumber = /\d+/;
+  // console.log("mode", mode)
 
 
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
@@ -76,11 +77,20 @@ const NavbarTop = ({
             width: { xs: "150px", md: "170px", "borderRadius": "0", }
           }}
         >
-          <img
-            src={mode !== "light" ? logoWhite : logo}
-            alt="logo"
-            width={"100%"}
-          />
+          {
+            mode === "dark" ? 
+              <img
+                src={logoWhite}
+                alt="logo"
+                width={"100%"}
+              /> :
+              <img
+                src={logo}
+                alt="logo"
+                width={"100%"}
+              />
+          }
+          
         </IconButton>
 
         <Box
