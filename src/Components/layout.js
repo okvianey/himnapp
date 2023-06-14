@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
   }
 
   const [ mode, setMode ] = React.useState(defaultTheme);
-  console.log("🚀 ~ file: layout.js:24 ~ Layout ~ mode:", mode)
+  // console.log("🚀 ~ file: layout.js:24 ~ Layout ~ mode:", mode)
   
 
   React.useEffect(() => {
