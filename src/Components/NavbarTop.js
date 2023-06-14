@@ -43,7 +43,6 @@ const NavbarTop = ({
   // const hasNumber = /\d+/;
   // console.log("mode", mode)
 
-
   const [ anchorElUser, setAnchorElUser ] = React.useState(null);
 
   // const handleOpenUserMenu = (event) => {
@@ -58,7 +57,7 @@ const NavbarTop = ({
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: "background.default",
+        // backgroundColor: "background.default",
         padding: "10px",
         zIndex: 100
       }}>
