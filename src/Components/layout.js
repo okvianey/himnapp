@@ -21,6 +21,13 @@ const Layout = ({ children }) => {
   }
 
   const [ mode, setMode ] = React.useState(defaultTheme);
+  console.log("🚀 ~ file: layout.js:24 ~ Layout ~ mode:", mode)
+  
+
+  React.useEffect(() => {
+    localStorage.setItem("color-mode", mode);
+  }, [ mode ]);
+
 
   const colorMode = React.useMemo(
     () => ({
@@ -31,10 +38,7 @@ const Layout = ({ children }) => {
     []
   );
 
-  React.useEffect(() => {
-    localStorage.setItem("color-mode", mode);
-  }, [ mode ]);
-  
+
 
   const theme = React.useMemo(
     () =>

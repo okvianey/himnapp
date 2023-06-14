@@ -55,6 +55,7 @@ const NavbarTop = ({
 
   return (
     <AppBar
+      enableColorOnDark
       position="fixed"
       sx={{
         backgroundColor: "background.default",
