@@ -57,7 +57,7 @@ const NavbarTop = ({
     <AppBar
       position="fixed"
       sx={{
-        // backgroundColor: "background.default",
+        backgroundColor: "background.default",
         padding: "10px",
         zIndex: 100
       }}>

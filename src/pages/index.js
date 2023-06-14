@@ -67,7 +67,7 @@ const IndexPage = () => {
         
         <List
           sx={{
-            // bgcolor: "background.paper",
+            backgroundColor: "background.default",
             overflow: "auto"
         }}>
         {

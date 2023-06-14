@@ -33,7 +33,7 @@ function BottomBar() {
         showLabels
         value={value}
         sx={{
-          // backgroundColor: "background.default",
+          backgroundColor: "background.default",
           height: 80,
           padding: "5px 0 0 0",
           alignItems: "flex-start"
