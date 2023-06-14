@@ -23,7 +23,7 @@ const HimnoPage = ({ data, children }) => {
   
 
   return (
-    <Layout >
+    <Layout>
       <Paper sx={{ padding: "10px 10px" }}>        
 
         <Typography variant="h1" align="center" gutterBottom>
@@ -74,7 +74,7 @@ const HimnoPage = ({ data, children }) => {
 
             <Fab
               size='small'
-              disabled={page >= 199 ? true : false}
+              disabled={page >= 399 ? true : false}
               component={Link}
               to={`/himno/${page + 1}`}
               sx={{

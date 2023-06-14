@@ -14,11 +14,11 @@ import BookIcon from '@mui/icons-material/Book';
 function BottomBar() {
   const location = useLocation();
   const currentPage = location.pathname;
-  const hasNumber = /\d+/;
+  // const hasNumber = /\d+/;
 
   const value =
     currentPage.includes("about") ? 2 :
-      currentPage.includes("himno") && !hasNumber.test(currentPage) ? 1 : 0;
+      currentPage.includes("himno") ? 1 : 0;
 
   return (
     <Paper

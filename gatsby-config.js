@@ -1,7 +1,6 @@
 module.exports = {
   siteMetadata: {
     title: `himnapp`,
-    description: `Himnapp - Himnario Bautista`,
     siteUrl: `https://vianydev.github.io/himnapp/`,
   },
   pathPrefix: "/himnapp",
@@ -11,6 +10,7 @@ module.exports = {
       options: {
         name: "Himnapp - Himnario Bautista",
         short_name: "Himnapp",
+        description: `Himnapp - Himnario Bautista`,
         start_url: "/",
         background_color: "#ffffff",
         theme_color: "#CC3945",

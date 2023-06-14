@@ -57,16 +57,16 @@ const Layout = ({ children }) => {
         typography: {
           fontSize: 14,
           h1: {
-            fontSize: "2.1rem",
-          },
-          h2: {
             fontSize: "1.8rem",
           },
+          h2: {
+            fontSize: "1.5rem",
+          },
           h3: {
-            fontSize: "1.3rem",
+            fontSize: "1.1rem",
           },
           body2: {
-            fontSize: "1.5rem",
+            fontSize: "1.4rem",
           },
         },
       }),

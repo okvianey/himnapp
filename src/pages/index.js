@@ -64,7 +64,11 @@ const IndexPage = () => {
         <SearchBar handleSearch={handleInput} />
       </StyledSearchBox>
         
-      <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
+        <List
+          sx={{
+            // bgcolor: "background.paper",
+            overflow: "auto"
+        }}>
         {
           himnario.length > 0 ?
             

@@ -18,7 +18,7 @@ import {
   TextDecrease,
 } from '@mui/icons-material';
 import logo from "../images/logo.svg";
-import logoLight from "../images/logo-white.svg";
+import logoWhite from "../images/logo-white.svg";
 import DarkModeSwitch from "./darkModeSwitch";
 import SelectHymn from "./selectHymn";
 
@@ -77,7 +77,7 @@ const NavbarTop = ({
           }}
         >
           <img
-            src={mode === "light" ? logo : logoLight}
+            src={mode !== "light" ? logoWhite : logo}
             alt="logo"
             width={"100%"}
           />
