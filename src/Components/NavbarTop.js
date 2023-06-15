@@ -55,10 +55,11 @@ const NavbarTop = ({
 
   return (
     <AppBar
-      enableColorOnDark
+      // enableColorOnDark 
+      color="inherit"
       position="fixed"
       sx={{
-        backgroundColor: "background.default",
+        // backgroundColor: "background.default",
         // backgroundColor: `primary.${mode}`,
         padding: "10px",
         zIndex: 100
@@ -71,7 +72,6 @@ const NavbarTop = ({
         }}
       >
         <IconButton
-          className={"styles.cont"}
           component={Link}
           to="/"
           sx={{
@@ -80,66 +80,23 @@ const NavbarTop = ({
         >
           {
             mode === "dark" ? 
-              <img
-                src={logoWhite}
-                alt="logo"
-                width={"100%"}
-              /> :
-              <img
-                src={logo}
-                alt="logo"
-                width={"100%"}
-              />
+              <img src={logoWhite} alt="logo" width={"100%"} /> :
+              <img src={logo} alt="logo" width={"100%"} />
           }
-          
         </IconButton>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center"
-          }}>
-            <DarkModeSwitch mode={mode} />
-            {/* User Account Mobile */}
-            <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
-              <Menu
-                className="mobile-nav-links"
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-              </Menu>
-            </Box>
-            {/* User Account Desktop */}
-            <Box className="desktop-nav-links"
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
-                justifyContent: "flex-end",
-              }}
-            >
-            </Box>
-        </Box>
+        <DarkModeSwitch mode={mode} />
+
       </Toolbar>
 
       <Divider />
 
     
       {currentPage.includes("about") ?
-        <br /> :
-        <TextZoomBox>
-          <SelectHymn /> 
+        <span></span> :
+        <TextZoomBox sx={{ justifyContent: "center", alignItems: "center" }}>
+          {!currentPage.includes("himno") ?
+            <span></span> : <SelectHymn /> }
           <Box m={"5px"}>
             <ButtonGroup
               size="medium"

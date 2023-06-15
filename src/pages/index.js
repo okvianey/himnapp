@@ -74,6 +74,9 @@ const IndexPage = () => {
             himnario.map((node) => {
               const keyId = node.id;
 
+              if (node.frontmatter.slug === "0") { 
+                return (<p key={keyId}></p>)
+              }
               return (
                 <ListItem key={keyId} disablePadding divider>
                   <ListItemButton
@@ -85,6 +88,7 @@ const IndexPage = () => {
                   </ListItemButton>
                 </ListItem>
               );
+
             }) :
             <p></p>
           }

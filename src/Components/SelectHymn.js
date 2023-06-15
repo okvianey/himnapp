@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { useLocation } from "@reach/router";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {
   Box,
@@ -13,6 +14,8 @@ import {
   Dialog,
   DialogContent
 } from "@mui/material";
+
+// import hymnsList from "../assets/hymnsList.json";
 
 const SimpleDialog = ({ onClose, open }) => {
   const data = useStaticQuery(graphql`
@@ -27,6 +30,9 @@ const SimpleDialog = ({ onClose, open }) => {
       id
     }
   }}`);
+
+
+  // const himnario = hymnsList;
   
   return (
     <Dialog onClick={() => onClose()} open={open} fullWidth>
@@ -56,7 +62,7 @@ const SimpleDialog = ({ onClose, open }) => {
                     borderRadius: "5px",
                   }}
                 >
-                  <SearchIcon color="disabled" />
+                  <CloseIcon color="disabled" />
                 </MenuItem>
               );
             } else {
@@ -79,6 +85,7 @@ const SimpleDialog = ({ onClose, open }) => {
               );
             }})
           }
+          
         </MenuList>
       </DialogContent>
     </Dialog>

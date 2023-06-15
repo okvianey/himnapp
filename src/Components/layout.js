@@ -52,6 +52,8 @@ const Layout = ({ children }) => {
           neutral: {
             main: "#64748B",
             contrastText: "#fff",
+            bgDark: "#2e2e2e",
+            bgLight: "#fff"
           },
         },
         typography: {
@@ -72,6 +74,10 @@ const Layout = ({ children }) => {
       }),
     [mode]
   );
+
+  // useEffect(() => {
+  //   const handleMode => {}
+  // })
 
   // Text Size
   let textStorage;
