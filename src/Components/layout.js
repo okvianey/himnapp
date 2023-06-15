@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ColorModeContext } from "./context";
 import { CssBaseline, Container } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -20,16 +20,14 @@ const Layout = ({ children }) => {
         : "dark";
   }
 
-  const [ mode, setMode ] = React.useState(defaultTheme);
+  const [ mode, setMode ] = useState(defaultTheme);
   // console.log("🚀 ~ file: layout.js:24 ~ Layout ~ mode:", mode)
-  
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("color-mode", mode);
   }, [ mode ]);
 
-
-  const colorMode = React.useMemo(
+  const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
@@ -38,9 +36,7 @@ const Layout = ({ children }) => {
     []
   );
 
-
-
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {
@@ -84,7 +80,7 @@ const Layout = ({ children }) => {
   }
   const textSizeStorage = parseInt(textStorage);
   const textSizeDefault = textSizeStorage !== 16 ? textSizeStorage : 16;
-  const [ textSize, setTextSize ] = React.useState(textSizeDefault);
+  const [ textSize, setTextSize ] = useState(textSizeDefault);
   
   const handleTextSizeUp = () => {
     textSize < 30 ? setTextSize(textSize + 1) : setTextSize(16); 
@@ -93,7 +89,7 @@ const Layout = ({ children }) => {
     textSize >= 12 ? setTextSize(textSize - 1) : setTextSize(textSize);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.localStorage.setItem("textSizeStorage", textSize);
   }, [ textSize ])
 

@@ -36,8 +36,6 @@ const IndexPage = () => {
     setInput(e.target.value);
   }
 
-  
-
   React.useEffect(() => {
     const handleSearch = () => {
       let inputToUpper = input.toUpperCase();

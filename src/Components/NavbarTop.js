@@ -59,6 +59,7 @@ const NavbarTop = ({
       position="fixed"
       sx={{
         backgroundColor: "background.default",
+        // backgroundColor: `primary.${mode}`,
         padding: "10px",
         zIndex: 100
       }}>

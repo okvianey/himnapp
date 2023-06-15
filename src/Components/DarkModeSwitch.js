@@ -57,16 +57,16 @@ export default function DarkModeSwitch({ mode }) {
 
   const colorMode = React.useContext(ColorModeContext);
 
-  // const [ check, setCheck ] = React.useState(mode === 'dark' ? true : false);
+  const [ isCheck, setIsCheck ] = React.useState(false);
 
-  // React.useEffect(() => {
-  //   const toggleDefaultChecked = () => {
-  //     mode === 'dark' ? setCheck(true) : setCheck(false);
-  //   }
-  //   toggleDefaultChecked();
-  // }, [mode])
+  React.useEffect(() => {
+    const handleDefaultChecked = () => {
+      mode === 'dark' ? setIsCheck(true) : setIsCheck(false);
+    }
+    handleDefaultChecked();
+  }, [isCheck, mode])
 
   return (
-    <MaterialUISwitch onClick={colorMode.toggleColorMode} checked={mode === 'dark' ? true : false}  inputProps={{ 'aria-label': 'controlled' }} />
+    <MaterialUISwitch onClick={colorMode.toggleColorMode} checked={isCheck} inputProps={{ 'aria-label': 'controlled' }} />
   )
 }
