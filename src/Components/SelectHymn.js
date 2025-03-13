@@ -29,7 +29,12 @@ const SimpleDialog = ({ onClose, open }) => {
       }
       id
     }
-  }}`);
+  }}`
+  );
+
+  if (!data.allMdx || !data.allMdx.nodes) {
+    return <p>No hay himnos disponibles.</p>;
+  }
 
 
   // const himnario = hymnsList;

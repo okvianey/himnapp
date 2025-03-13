@@ -31,6 +31,7 @@ module.exports = {
         component: require.resolve("./src/components/layout.js"),
       },
     },
+    "gatsby-plugin-mdx",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -38,7 +39,6 @@ module.exports = {
         path: `${__dirname}/himnos/`,
       }
     },
-    "gatsby-plugin-mdx",
   ],
   
 }

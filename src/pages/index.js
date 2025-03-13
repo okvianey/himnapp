@@ -1,7 +1,6 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 import Layout from "../components/layout";
-import Seo from "../components/seo";
 import SearchBar from "../components/searchBar";
 import { styled } from "@mui/material/styles";
 import {
@@ -19,85 +18,72 @@ const StyledSearchBox = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-evenly",
   alignItems: "center",
-  [theme.breakpoints.down("sm")]: {
+  [ theme.breakpoints.down("sm") ]: {
     flexDirection: "column",
     alignItems: "flex-start",
   },
 }));
 
 const IndexPage = () => {
-
-  const himnarioCompleto = hymnsList;
-  const [ himnario, setHimnario ] = React.useState([]);
-  const [ input, setInput ] = React.useState("");
+  const [ input, setInput ] = useState("");
+  const [ himnario, setHimnario ] = useState(hymnsList);
 
   const handleInput = (e) => {
     e.preventDefault();
     setInput(e.target.value);
   }
 
-  React.useEffect(() => {
-    const handleSearch = () => {
-      let inputToUpper = input.toUpperCase();
-      
-      if (inputToUpper.length > 0) {
-        let himnosFiltrados =
-        himnarioCompleto.filter((himno) =>
-          himno.frontmatter.title.includes(inputToUpper)
-          );
-        setHimnario(himnosFiltrados);
-      } else {
-        setHimnario(hymnsList);
-      }
-    };
+  const filterHymns = (searchText) => {
+    if (searchText.trim() === "") {
+      return hymnsList; // Si no hay texto de búsqueda, devuelve la lista completa
+    }
 
-    handleSearch();
-  }, [ input, himnarioCompleto ])
+    const searchTextUpper = searchText.toUpperCase();
+    return hymnsList.filter((himno) =>
+      himno.frontmatter.title.toUpperCase().includes(searchTextUpper)
+    );
+  };
+
+  useEffect(() => {
+    const filteredHymns = filterHymns(input);
+    setHimnario(filteredHymns);
+  }, [input]);
 
 
   return (
-  <Layout>
-    <Box>
-      <StyledSearchBox>
-        <Typography variant="h1" mb={2}> Buscar himno: </Typography>
-        <SearchBar handleSearch={handleInput} />
-      </StyledSearchBox>
-        
-        <List
-          sx={{
-            // backgroundColor: "background.default",
-            overflow: "auto"
-        }}>
-        {
-          himnario.length > 0 ?
-            
-            himnario.map((node) => {
-              const keyId = node.id;
+    <Layout>
+      <Box>
+        <StyledSearchBox>
+          <Typography variant="h1" mb={2}> Buscar himno: </Typography>
+          <SearchBar handleSearch={handleInput} />
+        </StyledSearchBox>
 
-              if (node.frontmatter.slug === "0") { 
-                return (<p key={keyId}></p>)
-              }
-              return (
-                <ListItem key={keyId} disablePadding divider>
-                  <ListItemButton
-                    color="inherit"
-                    component={Link}
-                    to={`/himno/${node.frontmatter.slug}`}
-                  >
-                    {node.frontmatter.title}
-                  </ListItemButton>
-                </ListItem>
-              );
+        <List sx={{ overflow: "auto" }}>
+          {himnario.map((node) => {
+            const keyId = node.id;
 
-            }) :
-            <p></p>
-          }
-      </List>
+            if (node.frontmatter.slug === "0") {
+              return null; // No renderizar nada si el slug es "0"
+            }
 
-    </Box>
-  </Layout>
+            return (
+              <ListItem key={keyId} disablePadding divider>
+                <ListItemButton
+                  color="inherit"
+                  component={Link}
+                  to={`/himno/${node.frontmatter.slug}`}
+                >
+                  {node.frontmatter.title}
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+
+      </Box>
+    </Layout>
   );
 };
 
-export const Head = () => <Seo title="Himnario" />;
+// export const Head = () => <Seo title="Himnario" />;
 export default IndexPage;

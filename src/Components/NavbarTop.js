@@ -1,18 +1,16 @@
-import * as React from "react";
+import React from "react";
 import { Link } from "gatsby";
 import { useLocation } from "@reach/router";
 import {
   AppBar,
   Box,
   Toolbar,
-  Menu,
   Divider,
   IconButton,
   Button,
   ButtonGroup,
 } from "@mui/material/";
 import { styled } from '@mui/material/styles';
-
 import {
   TextIncrease,
   TextDecrease,
@@ -20,7 +18,7 @@ import {
 import logo from "../images/logo.svg";
 import logoWhite from "../images/logo-white.svg";
 import DarkModeSwitch from "./darkModeSwitch";
-import SelectHymn from "./selectHymn";
+import ComboBox from "./comboBox";
 
 const TextZoomBox = styled('div')(({ theme }) => ({
   padding: "15px 10px 0 10px",
@@ -34,24 +32,12 @@ const TextZoomBox = styled('div')(({ theme }) => ({
 
 const NavbarTop = ({
   mode,
-  handleTextSizeUp,
-  handleTextSizeDown,
+  handleTextSize,
   textSize,
 }) => {
   const location = useLocation();
   const currentPage = location.pathname;
-  // const hasNumber = /\d+/;
-  // console.log("mode", mode)
 
-  const [ anchorElUser, setAnchorElUser ] = React.useState(null);
-
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
     <AppBar
@@ -84,19 +70,18 @@ const NavbarTop = ({
               <img src={logo} alt="logo" width={"100%"} />
           }
         </IconButton>
-
         <DarkModeSwitch mode={mode} />
-
       </Toolbar>
 
       <Divider />
 
-    
-      {currentPage.includes("about") ?
-        <span></span> :
+      {
+        currentPage.includes("about") ? <span></span> : 
+
         <TextZoomBox sx={{ justifyContent: "center", alignItems: "center" }}>
-          {!currentPage.includes("himno") ?
-            <span></span> : <SelectHymn /> }
+          {
+            !currentPage.includes("himno") ? <span></span> : <ComboBox />
+          }
           <Box m={"5px"}>
             <ButtonGroup
               size="medium"
@@ -104,12 +89,16 @@ const NavbarTop = ({
               variant="outlined"
             >
               <Button
-                disabled={textSize < 12 ? true : false}
-                onClick={handleTextSizeDown}><TextDecrease sx={{ fontSize: "1rem" }} /></Button>
+                disabled={textSize <= 12}
+                onClick={() => handleTextSize("down")}>
+                  <TextDecrease sx={{ fontSize: "1rem" }} />
+              </Button>
               <Button
-                disabled={textSize > 29 ? true : false}
-                onClick={handleTextSizeUp}
-              ><TextIncrease sx={{ fontSize: "1rem" }} /></Button>
+                disabled={textSize >= 30}
+                onClick={() => handleTextSize("up")}
+                >
+                  <TextIncrease sx={{ fontSize: "1rem" }} />
+              </Button>
             </ButtonGroup>
           </Box>
         </TextZoomBox> 

@@ -5,27 +5,18 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import NavbarTop from "./NavbarTop";
 import BottomBar from "./BottomBar";
 
-const Layout = ({ children }) => {
+const useDefaultTheme = () => {
   const isBrowser = typeof window !== "undefined";
+  if (!isBrowser) return "light"; 
 
-  // Dark Mode
-  let defaultTheme;
-  
-  if (isBrowser) {
-    const colorStorage = localStorage.getItem("color-mode");
-    const systemColor = window.matchMedia("(prefers-color-scheme: dark)");
-    defaultTheme =
-      !systemColor.matches || colorStorage === "light" || colorStorage === undefined
-        ? "light"
-        : "dark";
-  }
+  const colorStorage = localStorage.getItem("color-mode");
+  const systemColor = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return colorStorage === "light" || !systemColor ? "light" : "dark";
+};
 
-  const [ mode, setMode ] = useState(defaultTheme);
-  // console.log("🚀 ~ file: layout.js:24 ~ Layout ~ mode:", mode)
 
-  useEffect(() => {
-    localStorage.setItem("color-mode", mode);
-  }, [ mode ]);
+const Layout = ({ children }) => {
+  const [ mode, setMode ] = useState(useDefaultTheme());
 
   const colorMode = useMemo(
     () => ({
@@ -75,29 +66,25 @@ const Layout = ({ children }) => {
     [mode]
   );
 
-  // useEffect(() => {
-  //   const handleMode => {}
-  // })
-
   // Text Size
-  let textStorage;
-  if (isBrowser) {
-    textStorage = localStorage.getItem("textSizeStorage");
-  }
-  const textSizeStorage = parseInt(textStorage);
-  const textSizeDefault = textSizeStorage !== 16 ? textSizeStorage : 16;
-  const [ textSize, setTextSize ] = useState(textSizeDefault);
-  
-  const handleTextSizeUp = () => {
-    textSize < 30 ? setTextSize(textSize + 1) : setTextSize(16); 
-  }
-  const handleTextSizeDown = () => {
-    textSize >= 12 ? setTextSize(textSize - 1) : setTextSize(textSize);
-  }
+  const [textSize, setTextSize] = useState(() => {
+    const isBrowser = typeof window !== "undefined";
+    const textStorage = isBrowser ? localStorage.getItem("textSizeStorage") : "16";
+    return parseInt(textStorage) || 16;
+  });
+
+  const handleTextSize = (direction) => {
+    setTextSize((prevSize) => {
+      if (direction === "up" && prevSize < 30) return prevSize + 1;
+      if (direction === "down" && prevSize >= 12) return prevSize - 1;
+      return prevSize;
+    });
+  };
 
   useEffect(() => {
-    window.localStorage.setItem("textSizeStorage", textSize);
-  }, [ textSize ])
+    localStorage.setItem("color-mode", mode);
+    localStorage.setItem("textSizeStorage", textSize);
+  }, [mode, textSize]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -105,12 +92,10 @@ const Layout = ({ children }) => {
         <CssBaseline />
         <NavbarTop 
           mode={mode} 
-          handleTextSizeUp={handleTextSizeUp}
-          handleTextSizeDown={handleTextSizeDown}
+          handleTextSize={handleTextSize}
           textSize={textSize}
         />
         <BottomBar />
-
         <Container
           sx={{
             padding: "100px 5px",
@@ -120,11 +105,11 @@ const Layout = ({ children }) => {
             },
             'p': {
               fontSize: `${textSize}px`,
-            }
+            } 
+
           }} >
           {children}
         </Container>
-
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
