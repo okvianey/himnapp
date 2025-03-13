@@ -46,7 +46,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     const filteredHymns = filterHymns(input);
-    setHimnario(filteredHymns);
+    setHimnario(filteredHymns || []);
   }, [input]);
 
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link, graphql } from 'gatsby';
 import Layout from '../../components/layout';
 // import Seo from '../../Components/seo';
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 const HimnarioPage = ({ data }) => {
-  const himnario = data;
+  const [himnario, setHimnario] = useState(data);
 
   return (
     <Layout sx={{ padding: "0 !important" }}>
