@@ -17,8 +17,8 @@ const HimnarioPage = ({ data }) => {
     <Layout sx={{ padding: "0 !important" }}>
       <Paper>
         <Box>
-          <List sx={{ overflow: "auto" }}>
-          {/* <List sx={{ bgcolor: "background.paper", overflow: "auto" }}> */}
+          {/* <List sx={{ overflow: "auto" }}> */}
+          <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
             {himnario.map((node) => {
               const keyId = node.id;
 

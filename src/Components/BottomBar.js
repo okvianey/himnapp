@@ -14,7 +14,6 @@ import BookIcon from '@mui/icons-material/Book';
 function BottomBar() {
   const location = useLocation();
   const currentPage = location.pathname;
-  // const hasNumber = /\d+/;
 
   const value =
     currentPage.includes("about") ? 2 :
@@ -22,6 +21,7 @@ function BottomBar() {
 
   return (
     <Paper
+      color="inherit"
       sx={{
         position: "fixed",
         bottom: 0, left: 0, right: 0,
@@ -30,10 +30,10 @@ function BottomBar() {
       >
 
       <BottomNavigation
+        color="inherit"
         showLabels
         value={value}
         sx={{
-          // backgroundColor: "background.default",
           height: 80,
           padding: "5px 0 0 0",
           alignItems: "flex-start"

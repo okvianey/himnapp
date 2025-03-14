@@ -40,16 +40,14 @@ const NavbarTop = ({
 
   return (
     <AppBar
-      // enableColorOnDark 
       color="inherit"
       position="fixed"
       sx={{
-        // backgroundColor: "background.default",
-        // backgroundColor: `primary.${mode}`,
         padding: "10px",
         zIndex: 100
       }}>
       <Toolbar
+        // color="inherit"
         disableGutters
         sx={{
           justifyContent: { xs: "space-between", md: "space-around" },

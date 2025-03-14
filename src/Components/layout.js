@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import NavbarTop from "./NavbarTop";
 import BottomBar from "./BottomBar";
 
-const useDefaultTheme = () => {
+const getDefaultTheme = () => {
   const isBrowser = typeof window !== "undefined";
   if (!isBrowser) return "light"; 
 
@@ -16,7 +16,17 @@ const useDefaultTheme = () => {
 
 
 const Layout = ({ children }) => {
-  const [ mode, setMode ] = useState(useDefaultTheme());
+  const [ mode, setMode ] = useState(getDefaultTheme());
+  // const [ mode, setMode ] = useState(useDefaultTheme());
+  // const [mode, setMode] = useState("light"); // Estado inicial temporal
+  const [isThemeLoaded, setIsThemeLoaded] = useState(false); // Estado para verificar si el tema está cargado
+
+  useEffect(() => {
+    const defaultMode = getDefaultTheme(); // Obtén el tema predeterminado
+    setMode(defaultMode); // Establece el tema
+    setIsThemeLoaded(true); // Marca el tema como cargado
+  }, []);
+
 
   const colorMode = useMemo(
     () => ({
@@ -84,7 +94,11 @@ const Layout = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("color-mode", mode);
     localStorage.setItem("textSizeStorage", textSize);
-  }, [mode, textSize]);
+  }, [ mode, textSize ]);
+  
+  if (!isThemeLoaded) {
+    return null; // No renderices nada hasta que el tema esté cargado
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -98,17 +112,12 @@ const Layout = ({ children }) => {
             },
           }}
         />
-        <NavbarTop 
-          mode={mode} 
-          handleTextSize={handleTextSize}
-          textSize={textSize}
-        />
-        <BottomBar />
         <Container
           sx={{
             padding: "100px 10px",
             maxWidth: { md: "600px" },
-            // color: "text.primary",
+            // backgroundColor: theme.palette.background.default,
+            // color: theme.palette.text.primary,
             'ol p': {
               fontSize: `${textSize}px`,
             },
@@ -117,7 +126,13 @@ const Layout = ({ children }) => {
             } 
 
           }} >
-          {children}
+            <NavbarTop 
+              mode={mode} 
+              handleTextSize={handleTextSize}
+              textSize={textSize}
+            />
+           <BottomBar />
+            {children}
         </Container>
       </ThemeProvider>
     </ColorModeContext.Provider>

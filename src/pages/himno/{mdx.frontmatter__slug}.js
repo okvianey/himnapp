@@ -23,12 +23,14 @@ const HimnoPage = ({ data, children }) => {
 
 
   return (
-    <Layout>
+    <Layout color="inherit">
       <Typography variant="h1" align="center" gutterBottom>
         {data.mdx.frontmatter.title}
       </Typography>
 
-      <Box align="center"
+      <Box
+        color="inherit"
+        align="center"
         sx={{
           padding: "0 2px",
           margin: "0 auto",
@@ -44,6 +46,7 @@ const HimnoPage = ({ data, children }) => {
         {children}
 
         <Box
+          color="inherit"
           sx={{
             display: "flex",
             justifyContent: "space-between",
