@@ -98,8 +98,9 @@ const Layout = ({ children }) => {
         <BottomBar />
         <Container
           sx={{
-            padding: "100px 5px",
-            maxWidth: { md: "600px" }, 
+            padding: "100px 10px",
+            maxWidth: { md: "600px" },
+            color: "text.primary",
             'ol p': {
               fontSize: `${textSize}px`,
             },

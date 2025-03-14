@@ -38,7 +38,6 @@ const NavbarTop = ({
   const location = useLocation();
   const currentPage = location.pathname;
 
-
   return (
     <AppBar
       // enableColorOnDark 

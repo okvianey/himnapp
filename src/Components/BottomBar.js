@@ -27,13 +27,13 @@ function BottomBar() {
         bottom: 0, left: 0, right: 0,
         zIndex: 700,
       }}
-      elevation={3}>
+      >
 
       <BottomNavigation
         showLabels
         value={value}
         sx={{
-          backgroundColor: "background.default",
+          // backgroundColor: "background.default",
           height: 80,
           padding: "5px 0 0 0",
           alignItems: "flex-start"

@@ -26,6 +26,7 @@ export default function ComboBox({ handleSearch }) {
     <Autocomplete
       // disablePortal
       id="combo-box-demo"
+      size='small'
       noOptionsText="Himno no encontrado"
       options={hymnsList}
       clearIcon={null}

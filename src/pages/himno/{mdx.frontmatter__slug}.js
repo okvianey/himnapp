@@ -35,7 +35,7 @@ const HimnoPage = ({ data, children }) => {
           maxWidth: "400px",
           textAlign: "center",
           'ol': {
-            padding: '5px 0',
+            margin: '5px 0',
             paddingInlineStart: '10px',
           },
 
@@ -72,7 +72,7 @@ const HimnoPage = ({ data, children }) => {
 
           <Fab
             size='small'
-            disabled={page >= 399 ? true : false}
+            disabled={page >= 449 ? true : false}
             component={Link}
             to={`/himno/${page + 1}`}
             sx={{

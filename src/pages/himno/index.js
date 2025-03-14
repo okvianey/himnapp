@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby';
 import Layout from '../../components/layout';
 // import Seo from '../../Components/seo';
 import {
+  Paper,
   Box,
   List,
   ListItem,
@@ -14,30 +15,36 @@ const HimnarioPage = ({ data }) => {
 
   return (
     <Layout sx={{ padding: "0 !important" }}>
-      <Box>
-        <List sx={{ bgcolor: "background.paper", overflow: "auto" }}>
-          {himnario.map((node) => {
-            const keyId = node.id;
+      <Paper>
+        <Box>
+          <List sx={{ overflow: "auto" }}>
+          {/* <List sx={{ bgcolor: "background.paper", overflow: "auto" }}> */}
+            {himnario.map((node) => {
+              const keyId = node.id;
 
-            if (node.frontmatter.slug === "0") {
-              return <ListItem key={keyId}></ListItem>;
-            } else {
-              return (
-                <ListItem key={keyId} disablePadding divider>
-                  <ListItemButton
-                    color="inherit"
-                    component={Link}
-                    to={`/himno/${node.frontmatter.slug}`}
+              if (node.frontmatter.slug === "0") {
+                return <ListItem key={keyId}></ListItem>;
+              } else {
+                return (
+                  <ListItem key={keyId}
+                    disablePadding
+                    divider
                   >
-                    {node.frontmatter.title}
-                  </ListItemButton>
-                </ListItem>
-              );
-            }
-          })}
-        </List>
-
-      </Box>
+                    <ListItemButton
+                      color="inherit"
+                      disablePadding
+                      component={Link}
+                      to={`/himno/${node.frontmatter.slug}`}
+                    >
+                      {node.frontmatter.title}
+                    </ListItemButton>
+                  </ListItem>
+                );
+              }
+            })}
+          </List>
+        </Box>
+      </Paper>
     </Layout>
   )
 }
