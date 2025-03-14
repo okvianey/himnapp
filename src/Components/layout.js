@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ColorModeContext } from "./context";
-import { CssBaseline, Container } from "@mui/material/";
+import { CssBaseline, Container, GlobalStyles } from "@mui/material/";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import NavbarTop from "./NavbarTop";
 import BottomBar from "./BottomBar";
@@ -90,6 +90,14 @@ const Layout = ({ children }) => {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <GlobalStyles
+          styles={{
+            body: {
+              backgroundColor: theme.palette.background.default,
+              color: theme.palette.text.primary,
+            },
+          }}
+        />
         <NavbarTop 
           mode={mode} 
           handleTextSize={handleTextSize}
@@ -100,7 +108,7 @@ const Layout = ({ children }) => {
           sx={{
             padding: "100px 10px",
             maxWidth: { md: "600px" },
-            color: "text.primary",
+            // color: "text.primary",
             'ol p': {
               fontSize: `${textSize}px`,
             },
