@@ -9,11 +9,6 @@
 
 ## 🚀 Quick start
 
-<!-- ## Example Site
-| [![](screenshots/homepage.png)](https://vianydev.github.io/himnappweb/) | [![](screenshots/features1.png)](https://vianydev.github.io/himnappweb) |
-|:---:|:---:|
-| **Homepage**  | **About**  | -->
-
 ## Table of contents
 
 - [Overview](#overview)
@@ -61,7 +56,7 @@ Some third-party plugins that we used to build this template. Please check their
 
 ## Author
 
-☕️ Designed & Developed by [vianydev](https://vianydev.github.io)
-- Twitter - [@vianydev](https://www.twitter.com/vianydev)
+☕️ Made with coffee and code by [vianydev](https://vianydev.github.io)
+
 - Linkedin - [@vianydev](https://www.linkedin.com/in/vianydev/)
 - Github - [@vianydev](https://github.com/vianydev)
