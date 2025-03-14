@@ -72,7 +72,7 @@ const HimnoPage = ({ data, children }) => {
 
           <Fab
             size='small'
-            disabled={page >= 449 ? true : false}
+            disabled={page >= 530 ? true : false}
             component={Link}
             to={`/himno/${page + 1}`}
             sx={{
