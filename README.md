@@ -48,6 +48,12 @@ Para iniciar servidor
 Para mandar a producció
 * gatsby build
 
+Para desplegar en gh pages
+* npm deploy
+
+
+Si hay error al hacer deploy, primero correr servidor con gatsby dev
+
 
 ## Author
 
