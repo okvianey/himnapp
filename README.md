@@ -52,7 +52,12 @@ Para desplegar en gh pages
 * npm deploy
 
 
+### Trobleshoothing
+
 Si hay error al hacer deploy, primero correr servidor con gatsby dev
+
+Si se hace una actualización y no se ve la pagina. Revisar que en gh pages esté el subdominio actualizado con su respectivo CNAME
+
 
 
 ## Author
