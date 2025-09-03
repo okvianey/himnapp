@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://vianydev.github.io">
+  <a href="https://okvianey.github.io">
     <img alt="himnapp" src="/src/images/logo-white.svg" width="160" />
   </a>
 </p>
@@ -22,9 +22,9 @@
 
 ### Links
 
-👉🏻 Code: [Code URL](https://github.com/vianydev/himnapp)
+👉🏻 Code: [Code URL](https://github.com/okvianey/himnapp)
 
-👉🏻 Live Site URL: [View Live Preview](https://vianydev.github.io/himnapp/)
+👉🏻 Live Site URL: [View Live Preview](https://himnapp/)
 
 ## My process
 
@@ -56,7 +56,7 @@ Some third-party plugins that we used to build this template. Please check their
 
 ## Author
 
-☕️ Made with coffee and code by [vianydev](https://vianydev.github.io)
+☕️ Made with coffee and code by [vianydev](https://okvianey.github.io)
 
 - Linkedin - [@vianydev](https://www.linkedin.com/in/vianydev/)
-- Github - [@vianydev](https://github.com/vianydev)
+- Github - [@vianydev](https://github.com/okvianey)

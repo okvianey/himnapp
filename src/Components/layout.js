@@ -17,8 +17,6 @@ const getDefaultTheme = () => {
 
 const Layout = ({ children }) => {
   const [ mode, setMode ] = useState(getDefaultTheme());
-  // const [ mode, setMode ] = useState(useDefaultTheme());
-  // const [mode, setMode] = useState("light"); // Estado inicial temporal
   const [isThemeLoaded, setIsThemeLoaded] = useState(false); // Estado para verificar si el tema está cargado
 
   useEffect(() => {
@@ -26,7 +24,6 @@ const Layout = ({ children }) => {
     setMode(defaultMode); // Establece el tema
     setIsThemeLoaded(true); // Marca el tema como cargado
   }, []);
-
 
   const colorMode = useMemo(
     () => ({
