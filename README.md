@@ -9,14 +9,7 @@
 
 ## 🚀 Quick start
 
-## Table of contents
 
-- [Overview](#overview)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Pages](#pages)
-  - [Resources](#useful-resources)
-- [Author](#author)
 
 ## Overview
 
@@ -24,15 +17,8 @@
 
 👉🏻 Code: [Code URL](https://github.com/okvianey/himnapp)
 
-👉🏻 Live Site URL: [View Live Preview](https://himnapp/)
+👉🏻 Live Site URL: [View Live Preview](https://himnapp.flatlatte.com/)
 
-## My process
-
-### Pages
-
-* **Homepage**
-* **About**
-* **Hymn page**
 
 <!-- resources -->
 ### Resources
@@ -53,6 +39,15 @@ Some third-party plugins that we used to build this template. Please check their
     - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
     - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+
+## Doc
+
+Para iniciar servidor
+* gatsby dev
+
+Para mandar a producció
+* gatsby build
+
 
 ## Author
 
