@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `himnapp`,
-    siteUrl: `https://vianydev.github.io/himnapp/`,
+    siteUrl: `https://himnapp.flatlatte.com/`,
   },
-  pathPrefix: "/himnapp",
+  pathPrefix: "/",
   plugins: [
     {
       resolve: `gatsby-plugin-manifest`,
