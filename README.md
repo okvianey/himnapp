@@ -7,26 +7,16 @@
  HIMNAPP
 </h1>
 
-## 🚀 Quick start
-
-
-
-## Overview
-
 ### Links
 
 👉🏻 Code: [Code URL](https://github.com/okvianey/himnapp)
-
 👉🏻 Live Site URL: [View Live Preview](https://himnapp.flatlatte.com/)
 
-
-<!-- resources -->
 ### Resources
 
 Some third-party plugins that we used to build this template. Please check their license.
 
 * **Google Fonts**: <http://fonts.google.com/>
-
 
     - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
 
@@ -45,11 +35,11 @@ Some third-party plugins that we used to build this template. Please check their
 Para iniciar servidor
 * gatsby dev
 
-Para mandar a producció
+Para mandar a producción
 * gatsby build
 
 Para desplegar en gh pages
-* npm deploy
+* npm run deploy
 
 
 ### Trobleshoothing
@@ -62,7 +52,5 @@ Si se hace una actualización y no se ve la pagina. Revisar que en gh pages est�
 
 ## Author
 
-☕️ Made with coffee and code by [vianydev](https://okvianey.github.io)
-
-- Linkedin - [@vianydev](https://www.linkedin.com/in/vianydev/)
-- Github - [@vianydev](https://github.com/okvianey)
+☕️ Made with coffee and code by [okvianey](https://flatlatte.com/okvianey)
+📁 Github - [@okvianey](https://github.com/okvianey)

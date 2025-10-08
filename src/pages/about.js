@@ -16,12 +16,12 @@ function About() {
   return (
     <Layout>
       <Box>
-        <a href="https://flatlatte.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }} aria-label="Ir al sitio de flat latte">
+        <a href="https://flatlatte.com/okvianey" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }} aria-label="Ir al sitio de flat latte">
           <Card mb={3} sx={{ textAlign: "center",}}>
             <CardActionArea>
               <CardContent>
                 <LocalCafeOutlinedIcon fontSize="large" />
-                <Typography variant="h3" >Hecho con café y código por @flat.latte </Typography>
+                <Typography variant="h3" >Hecho con café y código por @okvianey </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
@@ -31,7 +31,7 @@ function About() {
           <Card p={5} sx={{ textAlign: "center",}}>
             <CardActionArea>
               <CardContent>
-                <Typography variant="body1" p={4}>Si ves un error o tienes alguna duda escribenos a <Typography variant="overline">hola@flatlatte.com</Typography> o da click aquí para contactarnos por Whatsapp</Typography>
+                <Typography variant="body1" p={4}>Si ves un error o tienes alguna duda, escríbenos a <Typography variant="overline">hola@flatlatte.com</Typography> o da clic aquí para contactarnos por Whatsapp</Typography>
               </CardContent>
             </CardActionArea>
           </Card>

@@ -7,18 +7,13 @@ import {
   Toolbar,
   Divider,
   IconButton,
-  Button,
-  ButtonGroup,
 } from "@mui/material/";
 import { styled } from '@mui/material/styles';
-import {
-  TextIncrease,
-  TextDecrease,
-} from '@mui/icons-material';
 import logo from "../images/logo.svg";
 import logoWhite from "../images/logo-white.svg";
 import DarkModeSwitch from "./darkModeSwitch";
 import ComboBox from "./comboBox";
+import TextZoomButtons from "./textZoomButtons";
 
 const TextZoomBox = styled('div')(({ theme }) => ({
   padding: "15px 10px 0 10px",
@@ -67,7 +62,14 @@ const NavbarTop = ({
               <img src={logo} alt="logo" width={"100%"} />
           }
         </IconButton>
-        <DarkModeSwitch mode={mode} />
+        <Box sx={{ display: "inline-flex", alignItems: "center" }}>
+          {
+            currentPage.includes("himno") ?
+              <TextZoomButtons handleTextSize={handleTextSize} textSize={textSize} /> :
+              <span></span>
+          }
+          <DarkModeSwitch mode={mode} />
+        </Box>
       </Toolbar>
 
       <Divider />
@@ -79,25 +81,6 @@ const NavbarTop = ({
           {
             !currentPage.includes("himno") ? <span></span> : <ComboBox />
           }
-          <Box m={"5px"}>
-            <ButtonGroup
-              size="medium"
-              color="neutral"
-              variant="outlined"
-            >
-              <Button
-                disabled={textSize <= 12}
-                onClick={() => handleTextSize("down")}>
-                  <TextDecrease sx={{ fontSize: "1rem" }} />
-              </Button>
-              <Button
-                disabled={textSize >= 30}
-                onClick={() => handleTextSize("up")}
-                >
-                  <TextIncrease sx={{ fontSize: "1rem" }} />
-              </Button>
-            </ButtonGroup>
-          </Box>
         </TextZoomBox> 
       }
     

@@ -45,10 +45,10 @@ const Layout = ({ children }) => {
             dark: "#8E2730",
           },
           secondary: {
-            main: "#fffff",
+            main: "#fff",
           },
           neutral: {
-            main: "#64748B",
+            main: mode === "light" ? "#2e2e2e" : "#fff",
             contrastText: "#fff",
             bgDark: "#2e2e2e",
             bgLight: "#fff"
@@ -111,7 +111,7 @@ const Layout = ({ children }) => {
         />
         <Container
           sx={{
-            padding: "100px 10px",
+            padding: "80px 10px",
             maxWidth: { md: "600px" },
             // backgroundColor: theme.palette.background.default,
             // color: theme.palette.text.primary,
@@ -128,8 +128,8 @@ const Layout = ({ children }) => {
               handleTextSize={handleTextSize}
               textSize={textSize}
             />
-           <BottomBar />
             {children}
+           <BottomBar />
         </Container>
       </ThemeProvider>
     </ColorModeContext.Provider>

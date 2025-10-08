@@ -33,17 +33,6 @@ const IndexPage = () => {
     setInput(e.target.value);
   }
 
-  // const filterHymns = (searchText) => {
-  //   if (searchText.trim() === "") {
-  //     return hymnsList; // Si no hay texto de búsqueda, devuelve la lista completa
-  //   }
-
-  //   const searchTextUpper = searchText.toUpperCase();
-  //   return hymnsList.filter((himno) =>
-  //     himno.frontmatter.title.toUpperCase().includes(searchTextUpper)
-  //   );
-  // };
-
   const filterHymns = (searchText) => {
     if (!hymnsList || !Array.isArray(hymnsList)) {
       return []; // Devuelve un array vacío si hymnsList no es válido
