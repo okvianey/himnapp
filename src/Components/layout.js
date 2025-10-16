@@ -128,8 +128,8 @@ const Layout = ({ children }) => {
               handleTextSize={handleTextSize}
               textSize={textSize}
             />
+            <BottomBar />
             {children}
-           <BottomBar />
         </Container>
       </ThemeProvider>
     </ColorModeContext.Provider>

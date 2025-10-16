@@ -5,7 +5,6 @@ import SearchBar from "../components/searchBar";
 import { styled } from "@mui/material/styles";
 import {
   Box,
-  Typography,
   List,
   ListItem,
   ListItemButton,
@@ -13,10 +12,9 @@ import {
 import hymnsList from "../assets/hymnsList.json";
 
 const StyledSearchBox = styled("div")(({ theme }) => ({
-  padding: 20,
-  border: "1px dashed grey",
+  padding: 16,
+  // border: "1px dashed grey",
   display: "flex",
-  justifyContent: "space-evenly",
   alignItems: "center",
   [ theme.breakpoints.down("sm") ]: {
     flexDirection: "column",
@@ -58,7 +56,6 @@ const IndexPage = () => {
     <Layout>
       <Box>
         <StyledSearchBox>
-          <Typography variant="h1" mb={2}> Buscar himno: </Typography>
           <SearchBar handleSearch={handleInput} />
         </StyledSearchBox>
 

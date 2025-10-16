@@ -15,7 +15,7 @@ const Search = styled('div')(({ theme }) => ({
   marginLeft: 0,
   width: '100%',
   [ theme.breakpoints.up('sm') ]: {
-    width: 'auto',
+    // width: 'auto',
   },
 }));
 
@@ -27,12 +27,14 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  color: theme.palette.neutral.main,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
+  width: '100%',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(2, 1, 1, 0),
     border: `1px solid ${alpha(theme.palette.common.black, 0.15)}`,
     borderRadius: '5px',
     // vertical padding + font size from searchIcon
@@ -40,8 +42,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [ theme.breakpoints.up('md') ]: {
-      width: '20ch',
+      // width: '20ch',
     },
+  },
+  '& .MuiInputBase-input::placeholder': {
+    fontSize: "1.5rem",
+  },
+  '& .MuiInputBase-input:focus-visible': {
+    outline: `${alpha(theme.palette.primary.main, 0.25)} auto 1px`,
   },
 }));
 
@@ -53,8 +61,8 @@ export default function SearchBar({ handleSearch }) {
           <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder=""
-        inputProps={{ 'aria-label': 'search' }}
+        placeholder="Buscar himno:"
+        inputProps={{ 'aria-label': 'buscar' }}
         onChange={handleSearch}
       />
     </Search>
